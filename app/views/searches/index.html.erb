@@ -1,2 +1,11 @@
-<h1>Searches#index</h1>
-<p>Find me in app/views/searches/index.html.erb</p>
+<div class="container mt-5 text-center">
+  <h1 class="display-5 fw-bold text-primary">サービス</h1>
+  <%= form_with url: "#", method: :get do |f| %>
+    <%= f.radio_button :match, "novels", class: "form-check-input" %>
+    <%= f.label :match_novels, "書籍からさがす", class: "form-check-label text-success fw-bold ps-2" %>
+    <%= f.radio_button :match, "tracks", class: "form-check-input" %>
+    <%= f.label :match_tracks, "音楽からさがす", class: "form-check-label text-success fw-bold ps-2" %>
+    <%= f.text_field :query, class: "form-control" %>
+    <%= f.submit "作品を検索", class: "btn btn-primary" %>
+  <% end %>
+</div>
