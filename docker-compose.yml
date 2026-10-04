@@ -18,6 +18,7 @@ services:
       TZ: Asia/Tokyo
       DATABASE_HOST: db
       DATABASE_PASSWORD: postgres
+      POSTGRES_PASSWORD: postgres
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
     ports:
       - "3000:3000"
@@ -26,12 +27,12 @@ services:
       - chrome
 
   db:
-    image: postgres:16
+    image: postgres:18
     container_name: myapp_db
     environment:
       POSTGRES_PASSWORD: postgres
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql
     ports:
       - "5432:5432"
 
