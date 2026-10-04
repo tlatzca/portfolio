@@ -1,7 +1,6 @@
 services:
   - type: web
-    name: butimsalamander
-    region: singapore
+    name: myapp
     runtime: ruby
     plan: free
     buildCommand: './bin/render-build.sh'
