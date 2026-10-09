@@ -4,7 +4,7 @@ Track.destroy_all
 Novel.destroy_all
 
 # Tracks (楽曲データ: 8件)
-Track.create!([
+tracks_data = [
   {
     title: "ネオン・ライム",
     artist: "City Beat",
@@ -98,7 +98,7 @@ Track.create!([
   {
     title: "電脳少女の憂鬱",
     artist: "Vocaloid Producer X",
-    genre: "アニメ・ボカロ・インターネット",
+    genre: "アニメ・ボーカロイド・インターネット",
     release_date: "2023-12-01",
     preview_url: "https://example.com/audio/sample7.mp3",
     image_url: "https://example.com/images/track7.jpg",
@@ -125,10 +125,10 @@ Track.create!([
     acousticness: 0.92,
     weirdness: 0.25
   }
-])
+]
 
 # Novels (小説データ: 8件)
-Novel.create!([
+novels_data = [
   {
     title: "時計塔の密室",
     author: "謎解太郎",
@@ -233,6 +233,24 @@ Novel.create!([
     acousticness: 0.80,
     weirdness: 0.22
   }
-])
+]
+
+Track.create!(
+  tracks_data.map do |track|
+    vector_array = [ track[:valence], track[:energy], track[:acousticness], track[:weirdness] ]
+    track.merge(
+      parameter_vector: vector_array.to_s
+    )
+  end
+)
+
+Novel.create!(
+  novels_data.map do |novel|
+    vector_array = [ novel[:valence], novel[:energy], novel[:acousticness], novel[:weirdness] ]
+    novel.merge(
+      parameter_vector: vector_array.to_s
+    )
+  end
+)
 
 puts "Seed data created successfully! (Tracks: #{Track.count}, Novels: #{Novel.count})"
