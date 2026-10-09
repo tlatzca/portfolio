@@ -237,7 +237,7 @@ novels_data = [
 
 Track.create!(
   tracks_data.map do |track|
-    vector_array = [track[:valence], track[:energy], track[:acousticness], track[:weirdness]]
+    vector_array = [ track[:valence], track[:energy], track[:acousticness], track[:weirdness] ]
     track.merge(
       parameter_vector: vector_array.to_s
     )
@@ -246,7 +246,7 @@ Track.create!(
 
 Novel.create!(
   novels_data.map do |novel|
-    vector_array = [novel[:valence], novel[:energy], novel[:acousticness], novel[:weirdness]]
+    vector_array = [ novel[:valence], novel[:energy], novel[:acousticness], novel[:weirdness] ]
     novel.merge(
       parameter_vector: vector_array.to_s
     )
