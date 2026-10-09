@@ -27,7 +27,7 @@ services:
       - chrome
 
   db:
-    image: postgres:18
+    image: pgvector/pgvector:pg18
     container_name: myapp_db
     environment:
       POSTGRES_PASSWORD: postgres

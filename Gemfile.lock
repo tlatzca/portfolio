@@ -147,6 +147,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.6.3-x86_64-linux)
+    pgvector (0.3.3)
     pp (0.6.4)
       prettyprint
     prettyprint (0.2.0)
@@ -280,6 +281,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   pg (~> 1.1)
+  pgvector
   puma (>= 5.0)
   rails (~> 8.0)
   rubocop-rails-omakase
