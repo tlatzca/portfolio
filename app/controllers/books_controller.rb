@@ -1,11 +1,11 @@
 class BooksController < ApplicationController
-  require 'net/http'
-  require 'uri'
-  
+  require "net/http"
+  require "uri"
+
   def index
     uri = URI.parse("https://openapi.rakuten.co.jp/services/api/BooksTotal/Search/20170404")
 
-    uri.query = URI.encode_www_form({ 
+    uri.query = URI.encode_www_form({
       format: "json",
       keyword: book_params[:query],
       applicationId: "4afa1179-b27e-4268-b841-9527ea5c0dec",
@@ -13,8 +13,8 @@ class BooksController < ApplicationController
     })
 
     http_request = Net::HTTP::Get.new(uri)
-    http_request['Referer'] = 'https://myapp-ih54.onrender.com/'
-    http_request['Origin'] = 'https://myapp-ih54.onrender.com/'
+    http_request["Referer"] = "https://myapp-ih54.onrender.com/"
+    http_request["Origin"] = "https://myapp-ih54.onrender.com/"
 
     response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
       http.request(http_request)
@@ -30,7 +30,7 @@ class BooksController < ApplicationController
       result["Item"]["author"].present? &&
       result["Item"]["itemCaption"].present?
     end
-    
+
     @first_book ||= results.find do |result|
       result["Item"]["author"].present?
     end
