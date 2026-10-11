@@ -41,10 +41,10 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
--- Name: novels; Type: TABLE; Schema: public; Owner: -
+-- Name: books; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.novels (
+CREATE TABLE public.books (
     id bigint NOT NULL,
     title character varying NOT NULL,
     author character varying NOT NULL,
@@ -64,10 +64,10 @@ CREATE TABLE public.novels (
 
 
 --
--- Name: novels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: books_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.novels_id_seq
+CREATE SEQUENCE public.books_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -76,10 +76,10 @@ CREATE SEQUENCE public.novels_id_seq
 
 
 --
--- Name: novels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: books_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.novels_id_seq OWNED BY public.novels.id;
+ALTER SEQUENCE public.books_id_seq OWNED BY public.books.id;
 
 
 --
@@ -136,10 +136,10 @@ ALTER SEQUENCE public.tracks_id_seq OWNED BY public.tracks.id;
 
 
 --
--- Name: novels id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: books id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.novels ALTER COLUMN id SET DEFAULT nextval('public.novels_id_seq'::regclass);
+ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_id_seq'::regclass);
 
 
 --
@@ -158,11 +158,11 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
--- Name: novels novels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: books books_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.novels
-    ADD CONSTRAINT novels_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT books_pkey PRIMARY KEY (id);
 
 
 --
@@ -182,10 +182,10 @@ ALTER TABLE ONLY public.tracks
 
 
 --
--- Name: index_novels_on_isbn; Type: INDEX; Schema: public; Owner: -
+-- Name: index_books_on_isbn; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_novels_on_isbn ON public.novels USING btree (isbn);
+CREATE UNIQUE INDEX index_books_on_isbn ON public.books USING btree (isbn);
 
 
 --
@@ -205,3 +205,4 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20261007131214'),
 ('20261005064338'),
 ('20261005045344');
+

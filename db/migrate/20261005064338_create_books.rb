@@ -1,6 +1,6 @@
-class CreateNovels < ActiveRecord::Migration[8.1]
+class CreateBooks < ActiveRecord::Migration[8.1]
   def change
-    create_table :novels do |t|
+    create_table :books do |t|
       t.string :title, null: false
       t.string :author, null: false
       t.string :isbn, null: false, index: { unique: true }
