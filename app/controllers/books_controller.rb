@@ -1,13 +1,13 @@
-class NovelsController < ApplicationController
+class BooksController < ApplicationController
   require 'net/http'
   require 'uri'
   
   def index
-    uri = URI.parse("https://openapi.rakuten.co.jp/services/api/NovelsTotal/Search/20170404")
+    uri = URI.parse("https://openapi.rakuten.co.jp/services/api/BooksTotal/Search/20170404")
 
     uri.query = URI.encode_www_form({ 
       format: "json",
-      keyword: novel_params[:query],
+      keyword: book_params[:query],
       applicationId: "4afa1179-b27e-4268-b841-9527ea5c0dec",
       accessKey: "pk_Kv3DMqh1VHmFyIO767T4f7BJTwGkbTGzQRF3wwuEFgb"
     })
@@ -26,19 +26,19 @@ class NovelsController < ApplicationController
       results = []
     end
 
-    @first_novel = results.find do |result|
+    @first_book = results.find do |result|
       result["Item"]["author"].present? &&
       result["Item"]["itemCaption"].present?
     end
     
-    @first_novel ||= results.find do |result|
+    @first_book ||= results.find do |result|
       result["Item"]["author"].present?
     end
   end
 
   private
 
-  def novel_params
+  def book_params
     params.permit(:query)
   end
 end

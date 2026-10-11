@@ -1,7 +1,7 @@
 # db/seeds.rb
 
 Track.destroy_all
-Novel.destroy_all
+Book.destroy_all
 
 # Tracks (楽曲データ: 8件)
 tracks_data = [
@@ -127,8 +127,8 @@ tracks_data = [
   }
 ]
 
-# Novels (小説データ: 8件)
-novels_data = [
+# Books (小説データ: 8件)
+books_data = [
   {
     title: "時計塔の密室",
     author: "謎解太郎",
@@ -136,7 +136,7 @@ novels_data = [
     genre: "ミステリー・サスペンス",
     caption: "吹雪の山荘で起きた不可解な殺人事件。提示されたアリバイの嘘を暴く。",
     release_date: "2021-02-18",
-    image_url: "https://example.com/images/novel1.jpg",
+    image_url: "https://example.com/images/book1.jpg",
     valence: 0.25,
     energy: 0.55,
     acousticness: 0.60,
@@ -149,7 +149,7 @@ novels_data = [
     genre: "SF",
     caption: "西暦2150年、人間とAIの境界線が消失した世界で探偵が追う真実。",
     release_date: "2023-11-30",
-    image_url: "https://example.com/images/novel2.jpg",
+    image_url: "https://example.com/images/book2.jpg",
     valence: 0.35,
     energy: 0.70,
     acousticness: 0.20,
@@ -162,7 +162,7 @@ novels_data = [
     genre: "ファンタジー",
     caption: "失われた魔法を取り戻すため、小さな精霊と少年が旅立つ冒険譚。",
     release_date: "2020-07-15",
-    image_url: "https://example.com/images/novel3.jpg",
+    image_url: "https://example.com/images/book3.jpg",
     valence: 0.60,
     energy: 0.65,
     acousticness: 0.40,
@@ -175,7 +175,7 @@ novels_data = [
     genre: "青春・恋愛",
     caption: "屋上で交わした約束。甘酸っぱくも切ない高校生活最後の夏物語。",
     release_date: "2022-06-10",
-    image_url: "https://example.com/images/novel4.jpg",
+    image_url: "https://example.com/images/book4.jpg",
     valence: 0.85,
     energy: 0.72,
     acousticness: 0.30,
@@ -188,7 +188,7 @@ novels_data = [
     genre: "ヒューマンドラマ・文芸",
     caption: "人々が抱える悩みを静かに包み込む、一杯の珈琲と店主の温かな眼差し。",
     release_date: "2019-10-05",
-    image_url: "https://example.com/images/novel5.jpg",
+    image_url: "https://example.com/images/book5.jpg",
     valence: 0.45,
     energy: 0.20,
     acousticness: 0.95,
@@ -201,7 +201,7 @@ novels_data = [
     genre: "ホラー・怪談",
     caption: "決して開けてはならない扉の向こうから聞こえる、呼ぶ声の正体。",
     release_date: "2022-08-01",
-    image_url: "https://example.com/images/novel6.jpg",
+    image_url: "https://example.com/images/book6.jpg",
     valence: 0.08,
     energy: 0.45,
     acousticness: 0.75,
@@ -214,7 +214,7 @@ novels_data = [
     genre: "歴史・時代小説",
     caption: "戦国時代、己の信条を貫き駆け抜けた若き武将の壮絶なる生涯。",
     release_date: "2018-05-20",
-    image_url: "https://example.com/images/novel7.jpg",
+    image_url: "https://example.com/images/book7.jpg",
     valence: 0.50,
     energy: 0.88,
     acousticness: 0.50,
@@ -227,7 +227,7 @@ novels_data = [
     genre: "ノンフィクション・エッセイ",
     caption: "10年間都市の片隅を歩き続けて見えた、人間模様と日常の愛おしさ。",
     release_date: "2023-01-12",
-    image_url: "https://example.com/images/novel8.jpg",
+    image_url: "https://example.com/images/book8.jpg",
     valence: 0.68,
     energy: 0.35,
     acousticness: 0.80,
@@ -244,13 +244,13 @@ Track.create!(
   end
 )
 
-Novel.create!(
-  novels_data.map do |novel|
-    vector_array = [ novel[:valence], novel[:energy], novel[:acousticness], novel[:weirdness] ]
-    novel.merge(
+Book.create!(
+  books_data.map do |book|
+    vector_array = [ book[:valence], book[:energy], book[:acousticness], book[:weirdness] ]
+    book.merge(
       parameter_vector: vector_array.to_s
     )
   end
 )
 
-puts "Seed data created successfully! (Tracks: #{Track.count}, Novels: #{Novel.count})"
+puts "Seed data created successfully! (Tracks: #{Track.count}, Books: #{Book.count})"

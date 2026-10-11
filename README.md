@@ -83,8 +83,8 @@
 
 ### 5-1. 似たサービスの調査
 
-- サービス名：Novel Ground Music
-- URL：https://novel-ground-music.me
+- サービス名：Book Ground Music
+- URL：https://book-ground-music.me
 - どんなことができるか：書籍とそれに合った音楽を投稿でき、他のユーザーが投稿したものを見ることができる
 
 - サービス名：TasteDive
@@ -147,7 +147,7 @@
 ### 懸念点②
 
 - 何が問題になりそうか：ユーザーが入力した書籍のデータにあらすじやジャンルが含まれていないこと
-- なぜそう思うか：Google Novels APIで取得したデータにはあらすじやジャンルが設定されていない場合があるため
+- なぜそう思うか：Google Books APIで取得したデータにはあらすじやジャンルが設定されていない場合があるため
 - そのために考えている対策：データが不足している場合は残りのデータから推論し、画面上には「あらすじ情報なし」等の注釈を表示する
 
 ---
@@ -167,7 +167,7 @@
 - フレームワーク：Ruby on Rails 7
 - DB：PostgreSQL
 - デプロイ先：Render（Rails・DB）
-- 外部API：OpenAI API, Google Novels API, iTunes Search API
+- 外部API：OpenAI API, Google Books API, iTunes Search API
 - 使用予定ライブラリ：OpenAI API Client, RSpec
 
 ---
