@@ -10,10 +10,8 @@ class CreateTracks < ActiveRecord::Migration[8.1]
       t.string :preview_url
       t.string :spotify_url
       t.string :applemusic_url
-      t.float :valence, null: false
-      t.float :energy, null: false
-      t.float :acousticness, null: false
-      t.float :weirdness, null: false
+      t.jsonb :details, null: false
+      t.column :parameter, "vector(4)", null: false
       t.timestamps
     end
   end
