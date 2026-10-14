@@ -171,7 +171,7 @@ class BooksController < ApplicationController
       parameter["story_progression"]["valence"],
       parameter["prose_style"]["valence"],
       parameter["worldview"]["valence"]
-    ] 
+    ]
     valence_average = valence_array.sum.fdiv(valence_array.size)
     valence = valence_average / 100
 
@@ -179,7 +179,7 @@ class BooksController < ApplicationController
       parameter["story_progression"]["energy"],
       parameter["prose_style"]["energy"],
       parameter["worldview"]["energy"]
-    ] 
+    ]
     energy_average = energy_array.sum.fdiv(energy_array.size)
     energy = energy_average / 100
 
@@ -187,7 +187,7 @@ class BooksController < ApplicationController
       parameter["story_progression"]["acousticness"],
       parameter["prose_style"]["acousticness"],
       parameter["worldview"]["acousticness"]
-    ] 
+    ]
     acousticness_average = acousticness_array.sum.fdiv(acousticness_array.size)
     acousticness = acousticness_average / 100
 
@@ -199,7 +199,7 @@ class BooksController < ApplicationController
     weirdness_average = weirdness_array.sum.fdiv(weirdness_array.size)
     weirdness = weirdness_average / 100
 
-    parameter_array = [valence, energy, acousticness, weirdness]
+    parameter_array = [ valence, energy, acousticness, weirdness ]
     parameter_vector = "[#{parameter_array.join(',')}]"
   end
 

@@ -16,7 +16,7 @@ tracks = [
     preview_url: "https://example.com/previews/amber_avenue.m4a",
     spotify_url: "https://open.spotify.com/track/sample1",
     applemusic_url: "https://music.apple.com/us/album/sample1",
-    details: { tempo: "120", mood: "melancholic", instruments: ["guitar", "synthesizer"] },
+    details: { tempo: "120", mood: "melancholic", instruments: [ "guitar", "synthesizer" ] },
     parameter: "[0.85, 0.20, 0.65, 0.40]"
   },
   {
@@ -29,7 +29,7 @@ tracks = [
     preview_url: "https://example.com/previews/cave_salamander.m4a",
     spotify_url: "https://open.spotify.com/track/sample2",
     applemusic_url: "https://music.apple.com/us/album/sample2",
-    details: { tempo: "65", mood: "dark", instruments: ["drone synth", "field recording"] },
+    details: { tempo: "65", mood: "dark", instruments: [ "drone synth", "field recording" ] },
     parameter: "[0.10, 0.90, 0.80, 0.15]"
   },
   {
@@ -42,7 +42,7 @@ tracks = [
     preview_url: "https://example.com/previews/guernicas_rain.m4a",
     spotify_url: "https://open.spotify.com/track/sample3",
     applemusic_url: "https://music.apple.com/us/album/sample3",
-    details: { tempo: "140", mood: "intense", instruments: ["distorted guitar", "strings"] },
+    details: { tempo: "140", mood: "intense", instruments: [ "distorted guitar", "strings" ] },
     parameter: "[0.40, 0.75, 0.30, 0.85]"
   },
   {
@@ -55,7 +55,7 @@ tracks = [
     preview_url: "https://example.com/previews/monochrome_glass.m4a",
     spotify_url: "https://open.spotify.com/track/sample4",
     applemusic_url: "https://music.apple.com/us/album/sample4",
-    details: { tempo: "80", mood: "cold", instruments: ["piano", "ambient pads"] },
+    details: { tempo: "80", mood: "cold", instruments: [ "piano", "ambient pads" ] },
     parameter: "[0.30, 0.60, 0.90, 0.20]"
   },
   {
@@ -68,7 +68,7 @@ tracks = [
     preview_url: "https://example.com/previews/neon_nocturne.m4a",
     spotify_url: "https://open.spotify.com/track/sample5",
     applemusic_url: "https://music.apple.com/us/album/sample5",
-    details: { tempo: "115", mood: "nostalgic", instruments: ["analog synth", "drum machine"] },
+    details: { tempo: "115", mood: "nostalgic", instruments: [ "analog synth", "drum machine" ] },
     parameter: "[0.70, 0.40, 0.50, 0.60]"
   },
   {
@@ -81,7 +81,7 @@ tracks = [
     preview_url: "https://example.com/previews/paper_lanterns.m4a",
     spotify_url: "https://open.spotify.com/track/sample6",
     applemusic_url: "https://music.apple.com/us/album/sample6",
-    details: { tempo: "95", mood: "warm", instruments: ["acoustic guitar", "cello"] },
+    details: { tempo: "95", mood: "warm", instruments: [ "acoustic guitar", "cello" ] },
     parameter: "[0.80, 0.15, 0.70, 0.25]"
   },
   {
@@ -94,7 +94,7 @@ tracks = [
     preview_url: "https://example.com/previews/subterranean_drift.m4a",
     spotify_url: "https://open.spotify.com/track/sample7",
     applemusic_url: "https://music.apple.com/us/album/sample7",
-    details: { tempo: "50", mood: "hypnotic", instruments: ["sub bass", "sine wave"] },
+    details: { tempo: "50", mood: "hypnotic", instruments: [ "sub bass", "sine wave" ] },
     parameter: "[0.05, 0.95, 0.95, 0.05]"
   },
   {
@@ -107,7 +107,7 @@ tracks = [
     preview_url: "https://example.com/previews/rust_velvet.m4a",
     spotify_url: "https://open.spotify.com/track/sample8",
     applemusic_url: "https://music.apple.com/us/album/sample8",
-    details: { tempo: "130", mood: "heavy", instruments: ["metallic percussion", "bass guitar"] },
+    details: { tempo: "130", mood: "heavy", instruments: [ "metallic percussion", "bass guitar" ] },
     parameter: "[0.35, 0.85, 0.40, 0.80]"
   },
   {
@@ -120,7 +120,7 @@ tracks = [
     preview_url: "https://example.com/previews/forgotten_frequencies.m4a",
     spotify_url: "https://open.spotify.com/track/sample9",
     applemusic_url: "https://music.apple.com/us/album/sample9",
-    details: { tempo: "85", mood: "dusty", instruments: ["vinyl noise", "rhodes piano"] },
+    details: { tempo: "85", mood: "dusty", instruments: [ "vinyl noise", "rhodes piano" ] },
     parameter: "[0.60, 0.30, 0.75, 0.30]"
   },
   {
@@ -133,7 +133,7 @@ tracks = [
     preview_url: "https://example.com/previews/silent_archipelago.m4a",
     spotify_url: "https://open.spotify.com/track/sample10",
     applemusic_url: "https://music.apple.com/us/album/sample10",
-    details: { tempo: "70", mood: "serene", harp: ["harp", "flute"] },
+    details: { tempo: "70", mood: "serene", harp: [ "harp", "flute" ] },
     parameter: "[0.50, 0.10, 0.95, 0.10]"
   }
 ]
@@ -153,7 +153,7 @@ books = [
     caption: "パプアニューギニアの孤立した村で行われた、消滅危機言語を巡る30年のフィールドワークの記録。",
     release_date: Date.new(2022, 8, 10),
     image_url: "https://example.com/images/taiyap.jpg",
-    details: { setting: "Papua New Guinea", tone: "scholarly and reflective", themes: ["language loss", "anthropology"] },
+    details: { setting: "Papua New Guinea", tone: "scholarly and reflective", themes: [ "language loss", "anthropology" ] },
     parameter: "[0.20, 0.85, 0.75, 0.20]"
   },
   {
@@ -164,7 +164,7 @@ books = [
     caption: "地図にない内陸部へ向かった旅人たちが、記憶と静寂のなかに迷い込むアンビエントな長編小説。",
     release_date: Date.new(2024, 1, 15),
     image_url: "https://example.com/images/inland.jpg",
-    details: { setting: "Unknown Inland", tone: "surreal and quiet", themes: ["isolation", "memory"] },
+    details: { setting: "Unknown Inland", tone: "surreal and quiet", themes: [ "isolation", "memory" ] },
     parameter: "[0.15, 0.95, 0.85, 0.10]"
   },
   {
@@ -175,7 +175,7 @@ books = [
     caption: "琥珀色の光が差し込む古い喫茶店を舞台に、交錯する人間模様を描いたノスタルジックな群像劇。",
     release_date: Date.new(2023, 6, 25),
     image_url: "https://example.com/images/amber_afternoon.jpg",
-    details: { setting: "Coffee shop", tone: "warm and melancholic", themes: ["nostalgia", "daily life"] },
+    details: { setting: "Coffee shop", tone: "warm and melancholic", themes: [ "nostalgia", "daily life" ] },
     parameter: "[0.80, 0.25, 0.60, 0.35]"
   },
   {
@@ -186,7 +186,7 @@ books = [
     caption: "すべてが透明な素材で構築された都市で起きた、足跡の残らない失踪事件を追うハードボイルド。",
     release_date: Date.new(2024, 9, 12),
     image_url: "https://example.com/images/glass_labyrinth.jpg",
-    details: { setting: "Glass City", tone: "cold and precise", themes: ["illusion", "mystery"] },
+    details: { setting: "Glass City", tone: "cold and precise", themes: [ "illusion", "mystery" ] },
     parameter: "[0.35, 0.65, 0.85, 0.30]"
   },
   {
@@ -197,7 +197,7 @@ books = [
     caption: "かつて栄えた工業都市の廃墟で、朽ちかけた巨大なオルゴールの音色を聞き続ける少年の物語。",
     release_date: Date.new(2023, 3, 30),
     image_url: "https://example.com/images/rust_musicbox.jpg",
-    details: { setting: "Industrial Ruin", tone: "industrial and melancholic", themes: ["decay", "youth"] },
+    details: { setting: "Industrial Ruin", tone: "industrial and melancholic", themes: [ "decay", "youth" ] },
     parameter: "[0.30, 0.80, 0.50, 0.65]"
   },
   {
@@ -208,7 +208,7 @@ books = [
     caption: "地図の果てにある終着駅から出発する夜行列車に乗り込んだ者たちが、それぞれの過去を精算する旅。",
     release_date: Date.new(2025, 1, 10),
     image_url: "https://example.com/images/terminal_arcadia.jpg",
-    details: { setting: "Night Train", tone: "dreamlike and warm", themes: ["journey", "redemption"] },
+    details: { setting: "Night Train", tone: "dreamlike and warm", themes: [ "journey", "redemption" ] },
     parameter: "[0.75, 0.35, 0.70, 0.40]"
   },
   {
@@ -219,7 +219,7 @@ books = [
     caption: "深夜の森に響く微かな鳴き声から、鳥たちの複雑なコミュニケーションと隠された生態を読み解く名著。",
     release_date: Date.new(2021, 11, 20),
     image_url: "https://example.com/images/night_ornithology.jpg",
-    details: { setting: "Night Forest", tone: "observative and calm", themes: ["nature", "sound"] },
+    details: { setting: "Night Forest", tone: "observative and calm", themes: [ "nature", "sound" ] },
     parameter: "[0.25, 0.70, 0.90, 0.15]"
   },
   {
@@ -230,7 +230,7 @@ books = [
     caption: "光の届かない海底で暮らす奇妙な生き物たちの孤独と、かすかな光への憧れを描いた短編詩集。",
     release_date: Date.new(2024, 6, 8),
     image_url: "https://example.com/images/deep_sea_swing.jpg",
-    details: { setting: "Deep Sea", tone: "surreal and quiet", themes: ["isolation", "poetic"] },
+    details: { setting: "Deep Sea", tone: "surreal and quiet", themes: [ "isolation", "poetic" ] },
     parameter: "[0.10, 0.90, 0.95, 0.10]"
   },
   {
@@ -241,7 +241,7 @@ books = [
     caption: "霧深い港町にある、失われた記憶や言葉だけを集めた図書館を巡る司書たちの静かな葛藤。",
     release_date: Date.new(2023, 10, 14),
     image_url: "https://example.com/images/foggy_archive.jpg",
-    details: { setting: "Foggy Port Town", tone: "mysterious and calm", themes: ["archive", "memory"] },
+    details: { setting: "Foggy Port Town", tone: "mysterious and calm", themes: [ "archive", "memory" ] },
     parameter: "[0.40, 0.60, 0.80, 0.25]"
   },
   {
@@ -252,7 +252,7 @@ books = [
     caption: "古代文明の遺跡から発掘された青銅のパーツを組み立てると、未来の予言が浮かび上がる壮大な歴史譚。",
     release_date: Date.new(2025, 2, 5),
     image_url: "https://example.com/images/bronze_chronicle.jpg",
-    details: { setting: "Ancient Ruin", tone: "epic and heavy", themes: ["history", "future"] },
+    details: { setting: "Ancient Ruin", tone: "epic and heavy", themes: [ "history", "future" ] },
     parameter: "[0.45, 0.80, 0.40, 0.70]"
   }
 ]

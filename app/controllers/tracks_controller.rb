@@ -155,12 +155,12 @@ class TracksController < ApplicationController
     else
       parameter = []
     end
-    
+
     valence_array = [
       parameter["sound"]["valence"],
       parameter["melody"]["valence"],
       parameter["lyrics_worldview"]["valence"]
-    ] 
+    ]
     valence_average = valence_array.sum.fdiv(valence_array.size)
     valence = valence_average / 100
 
@@ -168,7 +168,7 @@ class TracksController < ApplicationController
       parameter["sound"]["energy"],
       parameter["melody"]["energy"],
       parameter["lyrics_worldview"]["energy"]
-    ] 
+    ]
     energy_average = energy_array.sum.fdiv(energy_array.size)
     energy = energy_average / 100
 
@@ -176,7 +176,7 @@ class TracksController < ApplicationController
       parameter["sound"]["acousticness"],
       parameter["melody"]["acousticness"],
       parameter["lyrics_worldview"]["acousticness"]
-    ] 
+    ]
     acousticness_average = acousticness_array.sum.fdiv(acousticness_array.size)
     acousticness = acousticness_average / 100
 
@@ -188,7 +188,7 @@ class TracksController < ApplicationController
     weirdness_average = weirdness_array.sum.fdiv(weirdness_array.size)
     weirdness = weirdness_average / 100
 
-    parameter_array = [valence, energy, acousticness, weirdness]
+    parameter_array = [ valence, energy, acousticness, weirdness ]
     parameter_vector = "[#{parameter_array.join(',')}]"
   end
 
