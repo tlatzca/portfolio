@@ -10,6 +10,8 @@ services:
     container_name: myapp_web
     tty: true
     stdin_open: true
+    env_file:
+      - .env
     volumes:
       - .:/myapp
       - bundle_data:/usr/local/bundle:cached
@@ -17,8 +19,6 @@ services:
     environment:
       TZ: Asia/Tokyo
       DATABASE_HOST: db
-      DATABASE_PASSWORD: postgres
-      POSTGRES_PASSWORD: postgres
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
     ports:
       - "3000:3000"
