@@ -1,256 +1,265 @@
 # db/seeds.rb
 
+puts "Cleaning database..."
 Track.destroy_all
 Book.destroy_all
 
-# Tracks (楽曲データ: 8件)
-tracks_data = [
+puts "Creating tracks (10 items)..."
+tracks = [
   {
-    title: "ネオン・ライム",
-    artist: "City Beat",
-    genre: "ポップ・ヒップホップ",
-    release_date: "2023-06-15",
-    preview_url: "https://example.com/audio/sample1.mp3",
-    image_url: "https://example.com/images/track1.jpg",
+    title: "Amber Avenue",
+    artist: "The Pale Lanterns",
+    itunes_id: "tr_1001",
+    genre: "Indie Rock",
+    release_date: Date.new(2024, 5, 12),
+    image_url: "https://example.com/images/amber_avenue.jpg",
+    preview_url: "https://example.com/previews/amber_avenue.m4a",
     spotify_url: "https://open.spotify.com/track/sample1",
-    applemusic_url: "https://music.apple.com/jp/album/sample1",
-    itunes_id: "1000000001",
-    valence: 0.82,
-    energy: 0.75,
-    acousticness: 0.15,
-    weirdness: 0.20
+    applemusic_url: "https://music.apple.com/us/album/sample1",
+    details: { tempo: "120", mood: "melancholic", instruments: ["guitar", "synthesizer"] },
+    parameter: "[0.85, 0.20, 0.65, 0.40]"
   },
   {
-    title: "Iron Vortex",
-    artist: "Heavy Titans",
-    genre: "ハードロック・メタル",
-    release_date: "2021-09-20",
-    preview_url: "https://example.com/audio/sample2.mp3",
-    image_url: "https://example.com/images/track2.jpg",
+    title: "Cave Salamander",
+    artist: "Subterranean Echoes",
+    itunes_id: "tr_1002",
+    genre: "Ambient / Drone",
+    release_date: Date.new(2023, 11, 4),
+    image_url: "https://example.com/images/cave_salamander.jpg",
+    preview_url: "https://example.com/previews/cave_salamander.m4a",
     spotify_url: "https://open.spotify.com/track/sample2",
-    applemusic_url: "https://music.apple.com/jp/album/sample2",
-    itunes_id: "1000000002",
-    valence: 0.35,
-    energy: 0.95,
-    acousticness: 0.00,
-    weirdness: 0.30
+    applemusic_url: "https://music.apple.com/us/album/sample2",
+    details: { tempo: "65", mood: "dark", instruments: ["drone synth", "field recording"] },
+    parameter: "[0.10, 0.90, 0.80, 0.15]"
   },
   {
-    title: "変拍子の夕暮れ",
-    artist: "Math & Echoes",
-    genre: "エモ・マスロック・オルタナティブ",
-    release_date: "2022-11-03",
-    preview_url: "https://example.com/audio/sample3.mp3",
-    image_url: "https://example.com/images/track3.jpg",
+    title: "Guernica's Rain",
+    artist: "Monochrome Canvas",
+    itunes_id: "tr_1003",
+    genre: "Post-Rock",
+    release_date: Date.new(2025, 2, 20),
+    image_url: "https://example.com/images/guernicas_rain.jpg",
+    preview_url: "https://example.com/previews/guernicas_rain.m4a",
     spotify_url: "https://open.spotify.com/track/sample3",
-    applemusic_url: "https://music.apple.com/jp/album/sample3",
-    itunes_id: "1000000003",
-    valence: 0.45,
-    energy: 0.68,
-    acousticness: 0.25,
-    weirdness: 0.60
+    applemusic_url: "https://music.apple.com/us/album/sample3",
+    details: { tempo: "140", mood: "intense", instruments: ["distorted guitar", "strings"] },
+    parameter: "[0.40, 0.75, 0.30, 0.85]"
   },
   {
-    title: "Cybernetic Pulse",
-    artist: "Synth Lab",
-    genre: "エレクトロニック",
-    release_date: "2024-02-10",
-    preview_url: "https://example.com/audio/sample4.mp3",
-    image_url: "https://example.com/images/track4.jpg",
+    title: "Monochrome Glass",
+    artist: "Vitreous Cycle",
+    itunes_id: "tr_1004",
+    genre: "Minimalist",
+    release_date: Date.new(2023, 8, 15),
+    image_url: "https://example.com/images/monochrome_glass.jpg",
+    preview_url: "https://example.com/previews/monochrome_glass.m4a",
     spotify_url: "https://open.spotify.com/track/sample4",
-    applemusic_url: "https://music.apple.com/jp/album/sample4",
-    itunes_id: "1000000004",
-    valence: 0.50,
-    energy: 0.80,
-    acousticness: 0.05,
-    weirdness: 0.72
+    applemusic_url: "https://music.apple.com/us/album/sample4",
+    details: { tempo: "80", mood: "cold", instruments: ["piano", "ambient pads"] },
+    parameter: "[0.30, 0.60, 0.90, 0.20]"
   },
   {
-    title: "木漏れ日の木曜日",
-    artist: "アコースティック・デュオ",
-    genre: "アコースティック・フォーク",
-    release_date: "2020-04-18",
-    preview_url: "https://example.com/audio/sample5.mp3",
-    image_url: "https://example.com/images/track5.jpg",
+    title: "Neon Nocturne",
+    artist: "Midnight Transit",
+    itunes_id: "tr_1005",
+    genre: "Synthwave",
+    release_date: Date.new(2024, 10, 30),
+    image_url: "https://example.com/images/neon_nocturne.jpg",
+    preview_url: "https://example.com/previews/neon_nocturne.m4a",
     spotify_url: "https://open.spotify.com/track/sample5",
-    applemusic_url: "https://music.apple.com/jp/album/sample5",
-    itunes_id: "1000000005",
-    valence: 0.65,
-    energy: 0.30,
-    acousticness: 0.90,
-    weirdness: 0.10
+    applemusic_url: "https://music.apple.com/us/album/sample5",
+    details: { tempo: "115", mood: "nostalgic", instruments: ["analog synth", "drum machine"] },
+    parameter: "[0.70, 0.40, 0.50, 0.60]"
   },
   {
-    title: "静寂の波紋",
-    artist: "Silent Drone Project",
-    genre: "アンビエント",
-    release_date: "2019-08-12",
-    preview_url: "https://example.com/audio/sample6.mp3",
-    image_url: "https://example.com/images/track6.jpg",
+    title: "Paper Lanterns",
+    artist: "The Paper Kites",
+    itunes_id: "tr_1006",
+    genre: "Folk",
+    release_date: Date.new(2022, 4, 18),
+    image_url: "https://example.com/images/paper_lanterns.jpg",
+    preview_url: "https://example.com/previews/paper_lanterns.m4a",
     spotify_url: "https://open.spotify.com/track/sample6",
-    applemusic_url: "https://music.apple.com/jp/album/sample6",
-    itunes_id: "1000000006",
-    valence: 0.20,
-    energy: 0.10,
-    acousticness: 0.85,
-    weirdness: 0.75
+    applemusic_url: "https://music.apple.com/us/album/sample6",
+    details: { tempo: "95", mood: "warm", instruments: ["acoustic guitar", "cello"] },
+    parameter: "[0.80, 0.15, 0.70, 0.25]"
   },
   {
-    title: "電脳少女の憂鬱",
-    artist: "Vocaloid Producer X",
-    genre: "アニメ・ボーカロイド・インターネット",
-    release_date: "2023-12-01",
-    preview_url: "https://example.com/audio/sample7.mp3",
-    image_url: "https://example.com/images/track7.jpg",
+    title: "Subterranean Drift",
+    artist: "Deep Resonance",
+    itunes_id: "tr_1007",
+    genre: "Ambient",
+    release_date: Date.new(2024, 1, 10),
+    image_url: "https://example.com/images/subterranean_drift.jpg",
+    preview_url: "https://example.com/previews/subterranean_drift.m4a",
     spotify_url: "https://open.spotify.com/track/sample7",
-    applemusic_url: "https://music.apple.com/jp/album/sample7",
-    itunes_id: "1000000007",
-    valence: 0.70,
-    energy: 0.85,
-    acousticness: 0.10,
-    weirdness: 0.80
+    applemusic_url: "https://music.apple.com/us/album/sample7",
+    details: { tempo: "50", mood: "hypnotic", instruments: ["sub bass", "sine wave"] },
+    parameter: "[0.05, 0.95, 0.95, 0.05]"
   },
   {
-    title: "深夜2時のノクターン",
-    artist: "Midnight Jazz Quartet",
-    genre: "クラシック・ジャズ",
-    release_date: "2021-03-25",
-    preview_url: "https://example.com/audio/sample8.mp3",
-    image_url: "https://example.com/images/track8.jpg",
+    title: "Rust & Velvet",
+    artist: "Velvet Industrial",
+    itunes_id: "tr_1008",
+    genre: "Industrial",
+    release_date: Date.new(2023, 9, 5),
+    image_url: "https://example.com/images/rust_velvet.jpg",
+    preview_url: "https://example.com/previews/rust_velvet.m4a",
     spotify_url: "https://open.spotify.com/track/sample8",
-    applemusic_url: "https://music.apple.com/jp/album/sample8",
-    itunes_id: "1000000008",
-    valence: 0.30,
-    energy: 0.25,
-    acousticness: 0.92,
-    weirdness: 0.25
+    applemusic_url: "https://music.apple.com/us/album/sample8",
+    details: { tempo: "130", mood: "heavy", instruments: ["metallic percussion", "bass guitar"] },
+    parameter: "[0.35, 0.85, 0.40, 0.80]"
+  },
+  {
+    title: "Forgotten Frequencies",
+    artist: "Static Memory",
+    itunes_id: "tr_1009",
+    genre: "Lo-Fi / Chillhop",
+    release_date: Date.new(2024, 7, 22),
+    image_url: "https://example.com/images/forgotten_frequencies.jpg",
+    preview_url: "https://example.com/previews/forgotten_frequencies.m4a",
+    spotify_url: "https://open.spotify.com/track/sample9",
+    applemusic_url: "https://music.apple.com/us/album/sample9",
+    details: { tempo: "85", mood: "dusty", instruments: ["vinyl noise", "rhodes piano"] },
+    parameter: "[0.60, 0.30, 0.75, 0.30]"
+  },
+  {
+    title: "Silent Archipelago",
+    artist: "Isle of Silence",
+    itunes_id: "tr_1010",
+    genre: "New Age",
+    release_date: Date.new(2025, 3, 1),
+    image_url: "https://example.com/images/silent_archipelago.jpg",
+    preview_url: "https://example.com/previews/silent_archipelago.m4a",
+    spotify_url: "https://open.spotify.com/track/sample10",
+    applemusic_url: "https://music.apple.com/us/album/sample10",
+    details: { tempo: "70", mood: "serene", harp: ["harp", "flute"] },
+    parameter: "[0.50, 0.10, 0.95, 0.10]"
   }
 ]
 
-# Books (小説データ: 8件)
-books_data = [
+tracks.each do |track_attrs|
+  Track.create!(track_attrs)
+end
+puts "#{Track.count} tracks created."
+
+puts "Creating books (10 items)..."
+books = [
   {
-    title: "時計塔の密室",
-    author: "謎解太郎",
+    title: "最期の言葉の村へ：消滅危機言語タヤップを話す人々との30年",
+    author: "ドン・クリック",
     isbn: "9784000000001",
-    genre: "ミステリー・サスペンス",
-    caption: "吹雪の山荘で起きた不可解な殺人事件。提示されたアリバイの嘘を暴く。",
-    release_date: "2021-02-18",
-    image_url: "https://example.com/images/book1.jpg",
-    valence: 0.25,
-    energy: 0.55,
-    acousticness: 0.60,
-    weirdness: 0.40
+    genre: "ノンフィクション / 人類学",
+    caption: "パプアニューギニアの孤立した村で行われた、消滅危機言語を巡る30年のフィールドワークの記録。",
+    release_date: Date.new(2022, 8, 10),
+    image_url: "https://example.com/images/taiyap.jpg",
+    details: { setting: "Papua New Guinea", tone: "scholarly and reflective", themes: ["language loss", "anthropology"] },
+    parameter: "[0.20, 0.85, 0.75, 0.20]"
   },
   {
-    title: "アンドロイドの見る夢",
-    author: "未来健二",
+    title: "インランド・エクスペディション",
+    author: "架空 太郎",
     isbn: "9784000000002",
-    genre: "SF",
-    caption: "西暦2150年、人間とAIの境界線が消失した世界で探偵が追う真実。",
-    release_date: "2023-11-30",
-    image_url: "https://example.com/images/book2.jpg",
-    valence: 0.35,
-    energy: 0.70,
-    acousticness: 0.20,
-    weirdness: 0.85
+    genre: "文学・小説",
+    caption: "地図にない内陸部へ向かった旅人たちが、記憶と静寂のなかに迷い込むアンビエントな長編小説。",
+    release_date: Date.new(2024, 1, 15),
+    image_url: "https://example.com/images/inland.jpg",
+    details: { setting: "Unknown Inland", tone: "surreal and quiet", themes: ["isolation", "memory"] },
+    parameter: "[0.15, 0.95, 0.85, 0.10]"
   },
   {
-    title: "星屑のエルフェン",
-    author: "幻影華",
+    title: "アンバーの午後に",
+    author: "佐藤 花子",
     isbn: "9784000000003",
-    genre: "ファンタジー",
-    caption: "失われた魔法を取り戻すため、小さな精霊と少年が旅立つ冒険譚。",
-    release_date: "2020-07-15",
-    image_url: "https://example.com/images/book3.jpg",
-    valence: 0.60,
-    energy: 0.65,
-    acousticness: 0.40,
-    weirdness: 0.50
+    genre: "現代小説",
+    caption: "琥珀色の光が差し込む古い喫茶店を舞台に、交錯する人間模様を描いたノスタルジックな群像劇。",
+    release_date: Date.new(2023, 6, 25),
+    image_url: "https://example.com/images/amber_afternoon.jpg",
+    details: { setting: "Coffee shop", tone: "warm and melancholic", themes: ["nostalgia", "daily life"] },
+    parameter: "[0.80, 0.25, 0.60, 0.35]"
   },
   {
-    title: "放課後グラフィティ",
-    author: "夏野爽",
+    title: "硝子のラビリンス",
+    author: "北村 三郎",
     isbn: "9784000000004",
-    genre: "青春・恋愛",
-    caption: "屋上で交わした約束。甘酸っぱくも切ない高校生活最後の夏物語。",
-    release_date: "2022-06-10",
-    image_url: "https://example.com/images/book4.jpg",
-    valence: 0.85,
-    energy: 0.72,
-    acousticness: 0.30,
-    weirdness: 0.08
+    genre: "ミステリー / SF",
+    caption: "すべてが透明な素材で構築された都市で起きた、足跡の残らない失踪事件を追うハードボイルド。",
+    release_date: Date.new(2024, 9, 12),
+    image_url: "https://example.com/images/glass_labyrinth.jpg",
+    details: { setting: "Glass City", tone: "cold and precise", themes: ["illusion", "mystery"] },
+    parameter: "[0.35, 0.65, 0.85, 0.30]"
   },
   {
-    title: "川沿いの古い喫茶店",
-    author: "海原しずく",
+    title: "鉄錆とオルゴール",
+    author: "鈴木 次郎",
     isbn: "9784000000005",
-    genre: "ヒューマンドラマ・文芸",
-    caption: "人々が抱える悩みを静かに包み込む、一杯の珈琲と店主の温かな眼差し。",
-    release_date: "2019-10-05",
-    image_url: "https://example.com/images/book5.jpg",
-    valence: 0.45,
-    energy: 0.20,
-    acousticness: 0.95,
-    weirdness: 0.12
+    genre: "スチームパンク / 小説",
+    caption: "かつて栄えた工業都市の廃墟で、朽ちかけた巨大なオルゴールの音色を聞き続ける少年の物語。",
+    release_date: Date.new(2023, 3, 30),
+    image_url: "https://example.com/images/rust_musicbox.jpg",
+    details: { setting: "Industrial Ruin", tone: "industrial and melancholic", themes: ["decay", "youth"] },
+    parameter: "[0.30, 0.80, 0.50, 0.65]"
   },
   {
-    title: "闇に蠢く足音",
-    author: "黒木迷宮",
+    title: "終着駅のアルカディア",
+    author: "高橋 美咲",
     isbn: "9784000000006",
-    genre: "ホラー・怪談",
-    caption: "決して開けてはならない扉の向こうから聞こえる、呼ぶ声の正体。",
-    release_date: "2022-08-01",
-    image_url: "https://example.com/images/book6.jpg",
-    valence: 0.08,
-    energy: 0.45,
-    acousticness: 0.75,
-    weirdness: 0.90
+    genre: "ファンタジー",
+    caption: "地図の果てにある終着駅から出発する夜行列車に乗り込んだ者たちが、それぞれの過去を精算する旅。",
+    release_date: Date.new(2025, 1, 10),
+    image_url: "https://example.com/images/terminal_arcadia.jpg",
+    details: { setting: "Night Train", tone: "dreamlike and warm", themes: ["journey", "redemption"] },
+    parameter: "[0.75, 0.35, 0.70, 0.40]"
   },
   {
-    title: "蒼穹の刃",
-    author: "武道一馬",
+    title: "夜の鳥類学",
+    author: "W. J. スミス",
     isbn: "9784000000007",
-    genre: "歴史・時代小説",
-    caption: "戦国時代、己の信条を貫き駆け抜けた若き武将の壮絶なる生涯。",
-    release_date: "2018-05-20",
-    image_url: "https://example.com/images/book7.jpg",
-    valence: 0.50,
-    energy: 0.88,
-    acousticness: 0.50,
-    weirdness: 0.20
+    genre: "自然科学 / エッセイ",
+    caption: "深夜の森に響く微かな鳴き声から、鳥たちの複雑なコミュニケーションと隠された生態を読み解く名著。",
+    release_date: Date.new(2021, 11, 20),
+    image_url: "https://example.com/images/night_ornithology.jpg",
+    details: { setting: "Night Forest", tone: "observative and calm", themes: ["nature", "sound"] },
+    parameter: "[0.25, 0.70, 0.90, 0.15]"
   },
   {
-    title: "路地裏の観察記",
-    author: "街歩き太郎",
+    title: "深海魚のブランコ",
+    author: "田中 健太",
     isbn: "9784000000008",
-    genre: "ノンフィクション・エッセイ",
-    caption: "10年間都市の片隅を歩き続けて見えた、人間模様と日常の愛おしさ。",
-    release_date: "2023-01-12",
-    image_url: "https://example.com/images/book8.jpg",
-    valence: 0.68,
-    energy: 0.35,
-    acousticness: 0.80,
-    weirdness: 0.22
+    genre: "詩集 / イラスト",
+    caption: "光の届かない海底で暮らす奇妙な生き物たちの孤独と、かすかな光への憧れを描いた短編詩集。",
+    release_date: Date.new(2024, 6, 8),
+    image_url: "https://example.com/images/deep_sea_swing.jpg",
+    details: { setting: "Deep Sea", tone: "surreal and quiet", themes: ["isolation", "poetic"] },
+    parameter: "[0.10, 0.90, 0.95, 0.10]"
+  },
+  {
+    title: "霧のアーカイヴ",
+    author: "中村 恵子",
+    isbn: "9784000000009",
+    genre: "ミステリー / 文学",
+    caption: "霧深い港町にある、失われた記憶や言葉だけを集めた図書館を巡る司書たちの静かな葛藤。",
+    release_date: Date.new(2023, 10, 14),
+    image_url: "https://example.com/images/foggy_archive.jpg",
+    details: { setting: "Foggy Port Town", tone: "mysterious and calm", themes: ["archive", "memory"] },
+    parameter: "[0.40, 0.60, 0.80, 0.25]"
+  },
+  {
+    title: "青銅のクロニクル",
+    author: "小林 隼人",
+    isbn: "9784000000010",
+    genre: "歴史・SF",
+    caption: "古代文明の遺跡から発掘された青銅のパーツを組み立てると、未来の予言が浮かび上がる壮大な歴史譚。",
+    release_date: Date.new(2025, 2, 5),
+    image_url: "https://example.com/images/bronze_chronicle.jpg",
+    details: { setting: "Ancient Ruin", tone: "epic and heavy", themes: ["history", "future"] },
+    parameter: "[0.45, 0.80, 0.40, 0.70]"
   }
 ]
 
-Track.create!(
-  tracks_data.map do |track|
-    vector_array = [ track[:valence], track[:energy], track[:acousticness], track[:weirdness] ]
-    track.merge(
-      parameter_vector: vector_array.to_s
-    )
-  end
-)
+books.each do |book_attrs|
+  Book.create!(book_attrs)
+end
+puts "#{Book.count} books created."
 
-Book.create!(
-  books_data.map do |book|
-    vector_array = [ book[:valence], book[:energy], book[:acousticness], book[:weirdness] ]
-    book.merge(
-      parameter_vector: vector_array.to_s
-    )
-  end
-)
-
-puts "Seed data created successfully! (Tracks: #{Track.count}, Books: #{Book.count})"
+puts "Seed finished successfully!"

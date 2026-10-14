@@ -53,13 +53,10 @@ CREATE TABLE public.books (
     caption text,
     release_date date,
     image_url character varying,
-    valence double precision NOT NULL,
-    energy double precision NOT NULL,
-    acousticness double precision NOT NULL,
-    weirdness double precision NOT NULL,
+    details jsonb NOT NULL,
+    parameter public.vector(4) NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    parameter_vector public.vector
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -106,13 +103,10 @@ CREATE TABLE public.tracks (
     preview_url character varying,
     spotify_url character varying,
     applemusic_url character varying,
-    valence double precision NOT NULL,
-    energy double precision NOT NULL,
-    acousticness double precision NOT NULL,
-    weirdness double precision NOT NULL,
+    details jsonb NOT NULL,
+    parameter public.vector(4) NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    parameter_vector public.vector
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -202,7 +196,6 @@ CREATE UNIQUE INDEX index_tracks_on_itunes_id ON public.tracks USING btree (itun
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20261007131214'),
 ('20261005064338'),
 ('20261005045344');
 

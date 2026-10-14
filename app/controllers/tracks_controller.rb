@@ -150,10 +150,48 @@ class TracksController < ApplicationController
     end
 
     if response.is_a?(Net::HTTPSuccess)
-      @parameter = JSON.parse(response.body)
+      result_text = JSON.parse(response.body)["candidates"][0]["content"]["parts"][0]["text"]
+      parameter =  JSON.parse(result_text)
     else
-      @parameter = []
+      parameter = []
     end
+    
+    valence_array = [
+      parameter["sound"]["valence"],
+      parameter["melody"]["valence"],
+      parameter["lyrics_worldview"]["valence"]
+    ] 
+    valence_average = valence_array.sum.fdiv(valence_array.size)
+    valence = valence_average / 100
+
+    energy_array = [
+      parameter["sound"]["energy"],
+      parameter["melody"]["energy"],
+      parameter["lyrics_worldview"]["energy"]
+    ] 
+    energy_average = energy_array.sum.fdiv(energy_array.size)
+    energy = energy_average / 100
+
+    acousticness_array = [
+      parameter["sound"]["acousticness"],
+      parameter["melody"]["acousticness"],
+      parameter["lyrics_worldview"]["acousticness"]
+    ] 
+    acousticness_average = acousticness_array.sum.fdiv(acousticness_array.size)
+    acousticness = acousticness_average / 100
+
+    weirdness_array = [
+      parameter["sound"]["weirdness"],
+      parameter["melody"]["weirdness"],
+      parameter["lyrics_worldview"]["weirdness"]
+    ]
+    weirdness_average = weirdness_array.sum.fdiv(weirdness_array.size)
+    weirdness = weirdness_average / 100
+
+    parameter_array = [valence, energy, acousticness, weirdness]
+    parameter_vector = "[#{parameter_array.join(',')}]"
+    binding.break
+    
   end
 
   private
