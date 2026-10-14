@@ -19,21 +19,21 @@ class TracksController < ApplicationController
     else
       track = []
     end
-    
+
     uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent")
     request = Net::HTTP::Post.new(uri)
     request["Content-Type"] = "application/json"
     request["X-goog-api-key"] = ENV["GEMINI_API_KEY"]
     request.body = {
-      contents: [{
-        parts:[
-          { text: 
+      contents: [ {
+        parts: [
+          { text:
           "You are an expert who analyzes the atmosphere of a music and quantifies it using four parameters.
 
           Synthesize the provided input data and your knowledge of the target work to analyze and evaluate the work's atmosphere according to the following rules.
 
           ### 1. Extraction of Components
-          For the target work, extract elements related to the following three categories, 
+          For the target work, extract elements related to the following three categories,
           Categories: Sound, Melody/Progression, Title/Lyrical Worldview
 
           ### 2. Parameter Evaluation per Component
@@ -70,7 +70,7 @@ class TracksController < ApplicationController
           - Genre: #{track["primaryGenreName"]}"
           }
         ]
-      }],
+      } ],
       generationConfig: {
         temperature: 0,
         responseFormat: {
@@ -93,7 +93,7 @@ class TracksController < ApplicationController
                     acousticness: { type: "integer", minimum: 0, maximum: 100 },
                     weirdness: { type: "integer", minimum: 0, maximum: 100 }
                   },
-                  required: ["reason", "valence", "energy", "acousticness", "weirdness"]
+                  required: [ "reason", "valence", "energy", "acousticness", "weirdness" ]
                 },
                 melody: {
                   type: "object",
@@ -105,7 +105,7 @@ class TracksController < ApplicationController
                     acousticness: { type: "integer", minimum: 0, maximum: 100 },
                     weirdness: { type: "integer", minimum: 0, maximum: 100 }
                   },
-                  required: ["reason", "valence", "energy", "acousticness", "weirdness"]
+                  required: [ "reason", "valence", "energy", "acousticness", "weirdness" ]
                 },
                 lyrics_worldview: {
                   type: "object",
@@ -117,7 +117,7 @@ class TracksController < ApplicationController
                     acousticness: { type: "integer", minimum: 0, maximum: 100 },
                     weirdness: { type: "integer", minimum: 0, maximum: 100 }
                   },
-                  required: ["reason", "valence", "energy", "acousticness", "weirdness"]
+                  required: [ "reason", "valence", "energy", "acousticness", "weirdness" ]
                 },
                 genre_reason: {
                   type: "string",
@@ -138,17 +138,17 @@ class TracksController < ApplicationController
                   description: "The selected genre, chosen from the predefined list."
                 }
               },
-              required: ["target_name", "sound", "melody", "lyrics_worldview", "genre_reason", "genre"]
+              required: [ "target_name", "sound", "melody", "lyrics_worldview", "genre_reason", "genre" ]
             }
           }
         }
       }
     }.to_json
-    
+
     response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
       http.request(request)
     end
-    
+
     if response.is_a?(Net::HTTPSuccess)
       @parameter = JSON.parse(response.body)
     else
