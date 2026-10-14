@@ -190,8 +190,6 @@ class TracksController < ApplicationController
 
     parameter_array = [valence, energy, acousticness, weirdness]
     parameter_vector = "[#{parameter_array.join(',')}]"
-    binding.break
-    
   end
 
   private
