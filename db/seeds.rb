@@ -152,7 +152,7 @@ books = [
     genre: "ノンフィクション / 人類学",
     caption: "パプアニューギニアの孤立した村で行われた、消滅危機言語を巡る30年のフィールドワークの記録。",
     release_date: Date.new(2022, 8, 10),
-    image_url: "https://example.com/images/taiyap.jpg",
+    image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0042/9784101800042.jpg?_ex=200x200",
     details: { setting: "Papua New Guinea", tone: "scholarly and reflective", themes: [ "language loss", "anthropology" ] },
     parameter: "[0.20, 0.85, 0.75, 0.20]"
   },
@@ -163,7 +163,7 @@ books = [
     genre: "文学・小説",
     caption: "地図にない内陸部へ向かった旅人たちが、記憶と静寂のなかに迷い込むアンビエントな長編小説。",
     release_date: Date.new(2024, 1, 15),
-    image_url: "https://example.com/images/inland.jpg",
+    image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8206/9784049148206_1_22.jpg?_ex=200x200",
     details: { setting: "Unknown Inland", tone: "surreal and quiet", themes: [ "isolation", "memory" ] },
     parameter: "[0.15, 0.95, 0.85, 0.10]"
   },
@@ -174,7 +174,7 @@ books = [
     genre: "現代小説",
     caption: "琥珀色の光が差し込む古い喫茶店を舞台に、交錯する人間模様を描いたノスタルジックな群像劇。",
     release_date: Date.new(2023, 6, 25),
-    image_url: "https://example.com/images/amber_afternoon.jpg",
+    image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9886/9784150309886.jpg?_ex=200x200",
     details: { setting: "Coffee shop", tone: "warm and melancholic", themes: [ "nostalgia", "daily life" ] },
     parameter: "[0.80, 0.25, 0.60, 0.35]"
   },
@@ -185,7 +185,7 @@ books = [
     genre: "ミステリー / SF",
     caption: "すべてが透明な素材で構築された都市で起きた、足跡の残らない失踪事件を追うハードボイルド。",
     release_date: Date.new(2024, 9, 12),
-    image_url: "https://example.com/images/glass_labyrinth.jpg",
+    image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3132/9784569903132_1_2.jpg?_ex=200x200",
     details: { setting: "Glass City", tone: "cold and precise", themes: [ "illusion", "mystery" ] },
     parameter: "[0.35, 0.65, 0.85, 0.30]"
   },
@@ -196,7 +196,7 @@ books = [
     genre: "スチームパンク / 小説",
     caption: "かつて栄えた工業都市の廃墟で、朽ちかけた巨大なオルゴールの音色を聞き続ける少年の物語。",
     release_date: Date.new(2023, 3, 30),
-    image_url: "https://example.com/images/rust_musicbox.jpg",
+    image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1503/15030809.jpg?_ex=200x200",
     details: { setting: "Industrial Ruin", tone: "industrial and melancholic", themes: [ "decay", "youth" ] },
     parameter: "[0.30, 0.80, 0.50, 0.65]"
   },
@@ -207,7 +207,7 @@ books = [
     genre: "ファンタジー",
     caption: "地図の果てにある終着駅から出発する夜行列車に乗り込んだ者たちが、それぞれの過去を精算する旅。",
     release_date: Date.new(2025, 1, 10),
-    image_url: "https://example.com/images/terminal_arcadia.jpg",
+    image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1627/9784049141627_1_25.jpg?_ex=200x200",
     details: { setting: "Night Train", tone: "dreamlike and warm", themes: [ "journey", "redemption" ] },
     parameter: "[0.75, 0.35, 0.70, 0.40]"
   },
@@ -218,7 +218,7 @@ books = [
     genre: "自然科学 / エッセイ",
     caption: "深夜の森に響く微かな鳴き声から、鳥たちの複雑なコミュニケーションと隠された生態を読み解く名著。",
     release_date: Date.new(2021, 11, 20),
-    image_url: "https://example.com/images/night_ornithology.jpg",
+    image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0726/9784062940726_1_11.jpg?_ex=200x200",
     details: { setting: "Night Forest", tone: "observative and calm", themes: [ "nature", "sound" ] },
     parameter: "[0.25, 0.70, 0.90, 0.15]"
   },
@@ -229,7 +229,7 @@ books = [
     genre: "詩集 / イラスト",
     caption: "光の届かない海底で暮らす奇妙な生き物たちの孤独と、かすかな光への憧れを描いた短編詩集。",
     release_date: Date.new(2024, 6, 8),
-    image_url: "https://example.com/images/deep_sea_swing.jpg",
+    image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0319/9784801990319_1_4.jpg?_ex=200x200",
     details: { setting: "Deep Sea", tone: "surreal and quiet", themes: [ "isolation", "poetic" ] },
     parameter: "[0.10, 0.90, 0.95, 0.10]"
   },
@@ -240,7 +240,7 @@ books = [
     genre: "ミステリー / 文学",
     caption: "霧深い港町にある、失われた記憶や言葉だけを集めた図書館を巡る司書たちの静かな葛藤。",
     release_date: Date.new(2023, 10, 14),
-    image_url: "https://example.com/images/foggy_archive.jpg",
+    image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0806/9784150310806.jpg?_ex=200x200",
     details: { setting: "Foggy Port Town", tone: "mysterious and calm", themes: [ "archive", "memory" ] },
     parameter: "[0.40, 0.60, 0.80, 0.25]"
   },
@@ -251,7 +251,7 @@ books = [
     genre: "歴史・SF",
     caption: "古代文明の遺跡から発掘された青銅のパーツを組み立てると、未来の予言が浮かび上がる壮大な歴史譚。",
     release_date: Date.new(2025, 2, 5),
-    image_url: "https://example.com/images/bronze_chronicle.jpg",
+    image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1079/9784101121079.jpg?_ex=200x200",
     details: { setting: "Ancient Ruin", tone: "epic and heavy", themes: [ "history", "future" ] },
     parameter: "[0.45, 0.80, 0.40, 0.70]"
   }

@@ -15,9 +15,9 @@ class TracksController < ApplicationController
     response = Net::HTTP.get_response(uri)
 
     if response.is_a?(Net::HTTPSuccess)
-      track = JSON.parse(response.body)["results"][0]
+      @track = JSON.parse(response.body)["results"][0]
     else
-      track = []
+      @track = []
     end
 
     uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent")
@@ -63,11 +63,11 @@ class TracksController < ApplicationController
           ---
 
           [Input Data]
-          - Title: #{track["trackName"]}
-          - Artist: #{track["artistName"]}
-          - Album: #{track["collectionName"]}
-          - Release Date: #{track["releaseDate"]}
-          - Genre: #{track["primaryGenreName"]}"
+          - Title: #{@track["trackName"]}
+          - Artist: #{@track["artistName"]}
+          - Album: #{@track["collectionName"]}
+          - Release Date: #{@track["releaseDate"]}
+          - Genre: #{@track["primaryGenreName"]}"
           }
         ]
       } ],
@@ -153,7 +153,7 @@ class TracksController < ApplicationController
       result_text = JSON.parse(response.body)["candidates"][0]["content"]["parts"][0]["text"]
       parameter = JSON.parse(result_text)
     else
-      parameter = []
+      binding.break
     end
 
     valence_array = [
@@ -191,7 +191,7 @@ class TracksController < ApplicationController
     parameter_array = [ valence, energy, acousticness, weirdness ]
     parameter_vector = "[#{parameter_array.join(',')}]"
 
-    similar_books = Book.find_by_sql([
+    @books = Book.find_by_sql([
       "SELECT *,
       parameter <-> ?::vector
       AS l2_distance
@@ -199,7 +199,6 @@ class TracksController < ApplicationController
       ORDER BY l2_distance LIMIT 5;",
       parameter_vector
     ])
-
     binding.break
   end
 

@@ -34,7 +34,7 @@ class BooksController < ApplicationController
     book ||= results.find do |result|
       result["Item"]["author"].present?
     end
-
+    binding.break
     uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent")
     request = Net::HTTP::Post.new(uri)
     request["Content-Type"] = "application/json"
