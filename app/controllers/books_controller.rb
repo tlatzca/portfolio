@@ -162,7 +162,8 @@ class BooksController < ApplicationController
     end
 
     if response.is_a?(Net::HTTPSuccess)
-      parameter = JSON.parse(response.body)["candidates"][0]["content"]["parts"][0]["text"]
+      result_text = JSON.parse(response.body)["candidates"][0]["content"]["parts"][0]["text"]
+      parameter = JSON.parse(result_text)
     else
       parameter = []
     end
@@ -201,6 +202,15 @@ class BooksController < ApplicationController
 
     parameter_array = [ valence, energy, acousticness, weirdness ]
     parameter_vector = "[#{parameter_array.join(',')}]"
+
+    similar_tracks = Track.find_by_sql([
+      "SELECT *,
+      parameter <-> ?::vector
+      AS l2_distance
+      FROM Books
+      ORDER BY l2_distance LIMIT 5;",
+      parameter_vector
+    ])
   end
 
   private
