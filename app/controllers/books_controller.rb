@@ -203,13 +203,14 @@ class BooksController < ApplicationController
     parameter_array = [ valence, energy, acousticness, weirdness ]
     parameter_vector = "[#{parameter_array.join(',')}]"
 
-    similar_tracks = Track.find_by_sql(
+    similar_tracks = Track.find_by_sql([
       "SELECT *,
-      parameter <-> '#{parameter_vector}'
+      parameter <-> ?::vector
       AS l2_distance
       FROM Books
-      ORDER BY l2_distance LIMIT 5;"
-    )
+      ORDER BY l2_distance LIMIT 5;",
+      parameter_vector
+    ])
   end
 
   private
