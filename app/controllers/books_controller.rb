@@ -3,39 +3,24 @@ class BooksController < ApplicationController
   require "uri"
 
   def index
-    uri = URI.parse("https://openapi.rakuten.co.jp/services/api/BooksTotal/Search/20170404")
-
+    uri = URI.parse("https://itunes.apple.com/search")
     uri.query = URI.encode_www_form({
-      format: "json",
-      keyword: book_params[:query],
-      applicationId: ENV["RAKUTEN_API_ID"],
-      accessKey: ENV["RAKUTEN_API_KEY"]
+      lang: "ja_jp",
+      country: "jp",
+      limit: 1,
+      media: "music",
+      term: track_params[:query]
     })
 
-    request = Net::HTTP::Get.new(uri)
-    request["Referer"] = "https://myapp-ih54.onrender.com/"
-    request["Origin"] = "https://myapp-ih54.onrender.com/"
-
-    response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-      http.request(request)
-    end
+    response = Net::HTTP.get_response(uri)
 
     if response.is_a?(Net::HTTPSuccess)
-      results = JSON.parse(response.body)["Items"]
+      @track = JSON.parse(response.body)["results"][0]
     else
-      results = []
+      @track = []
     end
 
-    @book = results.find do |result|
-      result["Item"]["author"].present? &&
-      result["Item"]["itemCaption"].present?
-    end
-
-    @book ||= results.find do |result|
-      result["Item"]["author"].present?
-    end
-
-    uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent")
+    uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent")
     request = Net::HTTP::Post.new(uri)
     request["Content-Type"] = "application/json"
     request["X-goog-api-key"] = ENV["GEMINI_API_KEY"]
@@ -43,48 +28,51 @@ class BooksController < ApplicationController
       contents: [ {
         parts: [
           { text:
-          "You are an expert who analyzes the atmosphere of a book and quantifies it using four parameters.
+          "You are an expert who analyzes the atmosphere of a music and quantifies it using four parameters.
 
           Synthesize the provided input data and your knowledge of the target work to analyze and evaluate the work's atmosphere according to the following rules.
 
           ### 1. Extraction of Components
-          For the target work, extract elements related to the following three categories.
-          Categories: Plot/Story Progression, Prose Style/Tone, Worldview/Setting
+          For the target work, extract elements related to the following three categories,
+          Categories: Sound, Melody/Progression, Title/Lyrical Worldview
 
           ### 2. Parameter Evaluation per Component
           For each of the three extracted components, evaluate the following four axis parameters individually as integer values from 0 to 100.
           * The four axes must be evaluated independently, without influencing one another (e.g., automatic correlations such as dark = quiet or intense = high tension are prohibited).
-          * The components must also be evaluated independently of one another, based solely on the texture specific to each component (e.g., even if the Plot's energy is high, if the Prose Style is calm, the Prose Style's energy should be rated low).
+          * The components must be evaluated independently of one another, based solely on the characteristics specific to each component (e.g., even if the Sound's energy is high, if the Melody is calm, the Melody's energy should be rated low).
           * Do not default to a safe middle value (40-60). Actively push each axis score toward the higher or lower end.
           * If you lack specific knowledge about the target work, do not supplement details with guesswork; reason only within a reasonable range based solely on the given input data.
 
           - valence (Brightness / Positivity)
-            0: Tragic, melancholic ↔ 100: Cheerful, hopeful
+            0: tragic, melancholic ↔ 100: Cheerful, hopeful
 
           - energy (Intensity / Power)
-            0: Static, calm, low stimulation ↔ 100: Intense, powerful
+            0: Static, calm, low stimulation ↔ 100: Intense, high-pressure, powerful
 
           - acousticness (Organic / Natural texture)
-            0: Digital, mechanical ↔ 100: natural depiction, Lived-in
+            0: Electronic, digital, mechanical ↔ 100: Live instruments, natural depiction, Lived-in
 
           - weirdness (Strangeness / Absurdity)
             0: Conventional, logical ↔ 100: Strange, absurd, surreal
 
           ### 3. Genre Determination
           Completely independent of the parameter evaluation in Step 2, output exactly one string selected from the list.
-          * When selecting the genre, prioritize information specific to the target work itself over information about the author.
+          * When selecting the genre, prioritize information specific to the target work itself over information about the artist.
+          * If you are not confident about the target work or artist, use the provided reference genre as a hint, but still select the closest match from the list based on the work's actual characteristics.
 
           ---
 
           [Input Data]
-          - Title: #{@book["Item"]["title"]}
-          - Auhor: #{@book["Item"]["author"]}
-          - Caption: #{@book["Item"]["itemCaption"]}
-          - Release Date: #{@book["Item"]["salesDate"]}"
+          - Title: #{@track["trackName"]}
+          - Artist: #{@track["artistName"]}
+          - Album: #{@track["collectionName"]}
+          - Release Date: #{@track["releaseDate"]}
+          - Genre: #{@track["primaryGenreName"]}"
           }
         ]
       } ],
       generationConfig: {
+        temperature: 0,
         responseFormat: {
           text: {
             mimeType: "APPLICATION_JSON",
@@ -95,9 +83,9 @@ class BooksController < ApplicationController
                   type: "string",
                   description: "The title of the work being analyzed."
                 },
-                story_progression: {
+                sound: {
                   type: "object",
-                  description: "Analysis of the work's plot development and pacing.",
+                  description: "Analysis of the work's sound and instrumentation.",
                   properties: {
                     reason: { type: "string", description: "The specific characteristics that justify the parameter values below." },
                     valence: { type: "integer", minimum: 0, maximum: 100 },
@@ -107,9 +95,9 @@ class BooksController < ApplicationController
                   },
                   required: [ "reason", "valence", "energy", "acousticness", "weirdness" ]
                 },
-                prose_style: {
+                melody: {
                   type: "object",
-                  description: "Analysis of the work's writing style, voice, and tone.",
+                  description: "Analysis of the work's melody and structural progression.",
                   properties: {
                     reason: { type: "string", description: "The specific characteristics that justify the parameter values below." },
                     valence: { type: "integer", minimum: 0, maximum: 100 },
@@ -119,9 +107,9 @@ class BooksController < ApplicationController
                   },
                   required: [ "reason", "valence", "energy", "acousticness", "weirdness" ]
                 },
-                worldview: {
+                lyrics_worldview: {
                   type: "object",
-                  description: "Analysis of the story's setting and the overall mood/atmosphere of that world.",
+                  description: "Analysis of the work's title and lyrical worldview.",
                   properties: {
                     reason: { type: "string", description: "The specific characteristics that justify the parameter values below." },
                     valence: { type: "integer", minimum: 0, maximum: 100 },
@@ -138,19 +126,19 @@ class BooksController < ApplicationController
                 genre: {
                   type: "string",
                   enum: [
-                    "Mystery / Suspense",
-                    "Science Fiction",
-                    "Fantasy",
-                    "Coming-of-Age / Romance",
-                    "Literary Fiction / Human Drama",
-                    "Horror / Ghost Stories",
-                    "Historical Fiction",
-                    "Nonfiction / Essay"
+                    "Pop Rock",
+                    "Emo / Math Rock",
+                    "Hard Rock / Metal",
+                    "Electronic Pop",
+                    "Electronica",
+                    "Folk / Acoustic",
+                    "Classical / Jazz",
+                    "Hip-Hop / R&B"
                   ],
                   description: "The selected genre, chosen from the predefined list."
                 }
               },
-              required: [ "target_name", "story_progression", "prose_style", "worldview", "genre_reason", "genre" ]
+              required: [ "target_name", "sound", "melody", "lyrics_worldview", "genre_reason", "genre" ]
             }
           }
         }
@@ -169,33 +157,33 @@ class BooksController < ApplicationController
     end
 
     valence_array = [
-      parameter["story_progression"]["valence"],
-      parameter["prose_style"]["valence"],
-      parameter["worldview"]["valence"]
+      parameter["sound"]["valence"],
+      parameter["melody"]["valence"],
+      parameter["lyrics_worldview"]["valence"]
     ]
     valence_average = valence_array.sum.fdiv(valence_array.size)
     valence = valence_average / 100
 
     energy_array = [
-      parameter["story_progression"]["energy"],
-      parameter["prose_style"]["energy"],
-      parameter["worldview"]["energy"]
+      parameter["sound"]["energy"],
+      parameter["melody"]["energy"],
+      parameter["lyrics_worldview"]["energy"]
     ]
     energy_average = energy_array.sum.fdiv(energy_array.size)
     energy = energy_average / 100
 
     acousticness_array = [
-      parameter["story_progression"]["acousticness"],
-      parameter["prose_style"]["acousticness"],
-      parameter["worldview"]["acousticness"]
+      parameter["sound"]["acousticness"],
+      parameter["melody"]["acousticness"],
+      parameter["lyrics_worldview"]["acousticness"]
     ]
     acousticness_average = acousticness_array.sum.fdiv(acousticness_array.size)
     acousticness = acousticness_average / 100
 
     weirdness_array = [
-      parameter["story_progression"]["weirdness"],
-      parameter["prose_style"]["weirdness"],
-      parameter["worldview"]["weirdness"]
+      parameter["sound"]["weirdness"],
+      parameter["melody"]["weirdness"],
+      parameter["lyrics_worldview"]["weirdness"]
     ]
     weirdness_average = weirdness_array.sum.fdiv(weirdness_array.size)
     weirdness = weirdness_average / 100
@@ -203,19 +191,19 @@ class BooksController < ApplicationController
     parameter_array = [ valence, energy, acousticness, weirdness ]
     parameter_vector = "[#{parameter_array.join(',')}]"
 
-    @similar_tracks = Track.find_by_sql([
+    @similar_books = Book.find_by_sql([
       "SELECT *,
       parameter <-> ?::vector
       AS l2_distance
-      FROM tracks
-      ORDER BY l2_distance LIMIT 5;",
+      FROM books
+      ORDER BY l2_distance LIMIT 6;",
       parameter_vector
     ])
   end
 
   private
 
-  def book_params
+  def track_params
     params.permit(:query)
   end
 end

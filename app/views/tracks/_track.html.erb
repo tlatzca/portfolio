@@ -1,0 +1,13 @@
+<div class="col-5 col-lg-3 text-end">
+  <%= image_tag track.image_url.gsub('100x100', '210x210'), class: "img-fluid" %>
+</div>
+<div class="col-6 col-lg-3 d-flex flex-column">
+  <div class="mt-1">
+    <div class="fw-semibold"><%= track.title %></div>
+    <div><%= track.artist %></div>
+  </div>
+  <div class="mt-auto">
+    <div><%= audio_tag(track.preview_url, controls: true, style: "transform: scale(0.8); transform-origin: left;") %></div>
+    <div><%= link_to image_tag("https://toolbox.marketingtools.apple.com/api/v2/badges/listen-on-apple-music/badge/en-us"), track.applemusic_url %></div>
+  </div>
+</div>
