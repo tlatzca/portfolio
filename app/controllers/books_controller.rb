@@ -26,16 +26,16 @@ class BooksController < ApplicationController
       results = []
     end
 
-    book = results.find do |result|
+    @book = results.find do |result|
       result["Item"]["author"].present? &&
       result["Item"]["itemCaption"].present?
     end
 
-    book ||= results.find do |result|
+    @book ||= results.find do |result|
       result["Item"]["author"].present?
     end
 
-    uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent")
+    uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent")
     request = Net::HTTP::Post.new(uri)
     request["Content-Type"] = "application/json"
     request["X-goog-api-key"] = ENV["GEMINI_API_KEY"]
@@ -77,10 +77,10 @@ class BooksController < ApplicationController
           ---
 
           [Input Data]
-          - Title: #{book["Item"]["title"]}
-          - Auhor: #{book["Item"]["author"]}
-          - Caption: #{book["Item"]["itemCaption"]}
-          - Release Date: #{book["Item"]["salesDate"]}"
+          - Title: #{@book["Item"]["title"]}
+          - Auhor: #{@book["Item"]["author"]}
+          - Caption: #{@book["Item"]["itemCaption"]}
+          - Release Date: #{@book["Item"]["salesDate"]}"
           }
         ]
       } ],
@@ -165,7 +165,7 @@ class BooksController < ApplicationController
       result_text = JSON.parse(response.body)["candidates"][0]["content"]["parts"][0]["text"]
       parameter = JSON.parse(result_text)
     else
-      parameter = []
+      binding.break
     end
 
     valence_array = [
@@ -203,11 +203,11 @@ class BooksController < ApplicationController
     parameter_array = [ valence, energy, acousticness, weirdness ]
     parameter_vector = "[#{parameter_array.join(',')}]"
 
-    similar_tracks = Track.find_by_sql([
+    @similar_tracks = Track.find_by_sql([
       "SELECT *,
       parameter <-> ?::vector
       AS l2_distance
-      FROM Books
+      FROM tracks
       ORDER BY l2_distance LIMIT 5;",
       parameter_vector
     ])

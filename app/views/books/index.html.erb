@@ -1,3 +1,45 @@
-<h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
-<%= @parameter %>
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-5 text-end">
+      <%= image_tag @book["Item"]["largeImageUrl"].gsub('200x200', '300x300'), class: "img-fluid" %>
+    </div>
+    <div class="col-7 d-flex flex-column">
+      <div class="mt-1">
+        <div class="fw-semibold"><%= @book["Item"]["title"] %></div>
+        <div><%= @book["Item"]["author"] %></div>
+      </div>
+      <div class="mt-auto">
+        <div><%= @book["Item"]["itemCaption"] %></div>
+      </div>
+    </div>
+  </div>
+  <div class="fw-bold text-center fs-3 mt-3">検索結果</div>
+  <div class="row mt-2 gy-3 mb-3">
+    <div class="col-5 col-lg-3 text-end">
+      <%= image_tag @similar_tracks[0].image_url.gsub('100x100', '210x210'), class: "img-fluid" %>
+    </div>
+    <div class="col-6 col-lg-3 d-flex flex-column">
+      <div class="mt-1">
+        <div class="fw-semibold"><%= @similar_tracks[0].title %></div>
+        <div><%= @similar_tracks[0].artist %></div>
+      </div>
+      <div class="mt-auto">
+        <div><%= audio_tag(@similar_tracks[0]["preview_url"], controls: true, style: "transform: scale(0.8); transform-origin: left;") %></div>
+        <div><%= link_to image_tag("https://toolbox.marketingtools.apple.com/api/v2/badges/listen-on-apple-music/badge/en-us"), @similar_tracks[0]["applemusic_url"] %></div>
+      </div>
+    </div>
+    <div class="col-5 col-lg-3 text-end">
+      <%= image_tag @similar_tracks[1].image_url.gsub('100x100', '210x210'), class: "img-fluid" %>
+    </div>
+    <div class="col-6 col-lg-3 d-flex flex-column">
+      <div class="mt-1">
+        <div class="fw-semibold"><%= @similar_tracks[1].title %></div>
+        <div><%= @similar_tracks[1].artist %></div>
+      </div>
+      <div class="mt-auto">
+        <div><%= audio_tag(@similar_tracks[1]["preview_url"], controls: true, style: "transform: scale(0.8); transform-origin: left;") %></div>
+        <div><%= link_to image_tag("https://toolbox.marketingtools.apple.com/api/v2/badges/listen-on-apple-music/badge/en-us"), @similar_tracks[1]["applemusic_url"] %></div>
+      </div>
+    </div>
+  </div>
+</div>
