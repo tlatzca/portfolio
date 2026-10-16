@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row mt-3">
     <div class="col-5 text-end">
-      <%= image_tag @track["artworkUrl100"].gsub('100x100', '200x200')%>
+      <%= image_tag @track["artworkUrl100"].gsub('100x100', '210x210'), class: "img-fluid" %>
     </div>
     <div class="col-7 d-flex flex-column">
       <div class="mt-1">
@@ -15,29 +15,29 @@
     </div>
   </div>
   <div class="fw-bold text-center fs-3 mt-3">検索結果</div>
-  <div class="row mt-2 gy-3">
-    <div class="col-5 col-lg-2 text-end">
-      <%= image_tag @books[0].image_url %>
+  <div class="row mt-2 gy-3 mb-3">
+    <div class="col-5 col-lg-3 text-end">
+      <%= image_tag @similar_books[0].image_url.gsub('200x200', '300x300'), class: "img-fluid" %>
     </div>
-    <div class="col-6 col-lg-4 d-flex flex-column">
+    <div class="col-6 col-lg-3 d-flex flex-column">
       <div class="mt-1">
-        <div class="fw-semibold"><%= @books[0].title %></div>
-        <div><%= @books[0].author %></div>
+        <div class="fw-semibold"><%= @similar_books[0].title %></div>
+        <div><%= @similar_books[0].author %></div>
       </div>
       <div class="mt-auto">
-        <div><%= @books[0].caption %></div>
+        <div><%= @similar_books[0].caption %></div>
       </div>
     </div>
-    <div class="col-5 col-lg-2 text-end">
-      <%= image_tag @books[1].image_url %>
+    <div class="col-5 col-lg-3 text-end">
+      <%= image_tag @similar_books[1].image_url.gsub('200x200', '300x300'), class: "img-fluid" %>
     </div>
-    <div class="col-6 col-lg-4 d-flex flex-column">
+    <div class="col-6 col-lg-3 d-flex flex-column">
       <div class="mt-1">
-        <div class="fw-semibold"><%= @books[1].title %></div>
-        <div><%= @books[1].author %></div>
+        <div class="fw-semibold"><%= @similar_books[1].title %></div>
+        <div><%= @similar_books[1].author %></div>
       </div>
       <div class="mt-auto">
-        <div><%= @books[1].caption %></div>
+        <div><%= @similar_books[1].caption %></div>
       </div>
     </div>
   </div>
