@@ -1,0 +1,39 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "8efb8b2bb9a93eaa3185afeb3e2e8f472aba61beeea9de83b69b183f564425f9",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "file": "app/views/books/index.html.erb",
+      "line": 13,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(image_tag(\"https://toolbox.marketingtools.apple.com/api/v2/badges/listen-on-apple-music/badge/en-us\"), Track.new.applemusic_url)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "BooksController",
+          "method": "index",
+          "line": 231,
+          "file": "app/controllers/books_controller.rb",
+          "rendered": {
+            "name": "books/index",
+            "file": "app/views/books/index.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "books/index"
+      },
+      "user_input": "Track.new.applemusic_url",
+      "confidence": "Weak",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    }
+  ],
+  "brakeman_version": "8.1.0"
+}

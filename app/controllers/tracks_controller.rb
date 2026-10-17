@@ -90,7 +90,7 @@ class TracksController < ApplicationController
           - Caption: #{@book.caption}"
           }
         ]
-      }],
+      } ],
       generationConfig: {
         responseFormat: {
           text: {
@@ -223,7 +223,7 @@ class TracksController < ApplicationController
       lang: "ja_jp",
       country: "jp",
       media: "music",
-      id: @tracks.map(&:itunes_id).join(',')
+      id: @tracks.map(&:itunes_id).join(",")
     })
 
     response = Net::HTTP.get_response(uri)

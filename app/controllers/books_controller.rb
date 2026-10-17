@@ -213,10 +213,10 @@ class BooksController < ApplicationController
 
     uri.query = URI.encode_www_form({
       applicationId: ENV["RAKUTEN_API_ID"],
-      accessKey: ENV["RAKUTEN_API_KEY"],  
+      accessKey: ENV["RAKUTEN_API_KEY"],
       format: "json",
       orFlag: 1,
-      keyword: @books.map(&:isbn).join(' ')
+      keyword: @books.map(&:isbn).join(" ")
     })
 
     request = Net::HTTP::Get.new(uri)
