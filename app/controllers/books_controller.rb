@@ -15,9 +15,20 @@ class BooksController < ApplicationController
     response = Net::HTTP.get_response(uri)
 
     if response.is_a?(Net::HTTPSuccess)
-      @track = JSON.parse(response.body)["results"][0]
+      track_hash = JSON.parse(response.body).dig("results", 0)
+
+      if track_hash
+        @track = Track.new
+        @track.title = track_hash["trackName"]
+        @track.artist = track_hash["artistName"]
+        @track.album = track_hash["collectionName"]
+        @track.genre = track_hash["primaryGenreName"]
+        @track.image_url = track_hash["artworkUrl100"]
+        @track.preview_url = track_hash["previewUrl"]
+        @track.applemusic_url = track_hash["trackViewUrl"]
+      end
     else
-      @track = []
+      binding.break
     end
 
     uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent")
@@ -63,11 +74,10 @@ class BooksController < ApplicationController
           ---
 
           [Input Data]
-          - Title: #{@track["trackName"]}
-          - Artist: #{@track["artistName"]}
-          - Album: #{@track["collectionName"]}
-          - Release Date: #{@track["releaseDate"]}
-          - Genre: #{@track["primaryGenreName"]}"
+          - Title: #{@track.title}
+          - Artist: #{@track.artist}
+          - Album: #{@track.album}
+          - Genre: #{@track.genre}"
           }
         ]
       } ],
@@ -150,7 +160,7 @@ class BooksController < ApplicationController
     end
 
     if response.is_a?(Net::HTTPSuccess)
-      result_text = JSON.parse(response.body)["candidates"][0]["content"]["parts"][0]["text"]
+      result_text = JSON.parse(response.body)["candidates"][0]["content"]["parts"][0]["text"] || []
       parameter = JSON.parse(result_text)
     else
       binding.break
@@ -188,10 +198,9 @@ class BooksController < ApplicationController
     weirdness_average = weirdness_array.sum.fdiv(weirdness_array.size)
     weirdness = weirdness_average / 100
 
-    parameter_array = [ valence, energy, acousticness, weirdness ]
-    parameter_vector = "[#{parameter_array.join(',')}]"
+    parameter_vector = [ valence, energy, acousticness, weirdness ].to_s
 
-    @similar_books = Book.find_by_sql([
+    @books = Book.find_by_sql([
       "SELECT *,
       parameter <-> ?::vector
       AS l2_distance
@@ -199,6 +208,41 @@ class BooksController < ApplicationController
       ORDER BY l2_distance LIMIT 6;",
       parameter_vector
     ])
+
+    uri = URI.parse("https://openapi.rakuten.co.jp/services/api/BooksTotal/Search/20170404")
+
+    uri.query = URI.encode_www_form({
+      applicationId: ENV["RAKUTEN_API_ID"],
+      accessKey: ENV["RAKUTEN_API_KEY"],  
+      format: "json",
+      orFlag: 1,
+      keyword: @books.map(&:isbn).join(' ')
+    })
+
+    request = Net::HTTP::Get.new(uri)
+    request["Referer"] = "https://myapp-ih54.onrender.com/"
+    request["Origin"] = "https://myapp-ih54.onrender.com/"
+
+    response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      http.request(request)
+    end
+
+    if response.is_a?(Net::HTTPSuccess)
+      book_hashes = JSON.parse(response.body)["Items"]&.map { _1["Item"] } || []
+
+      @books.each do |book|
+        book_hash = book_hashes.find { |b| b["isbn"] == book.isbn }
+        next unless book_hash
+
+        book.title = book_hash["title"]
+        book.author = book_hash["author"]
+        book.caption = book_hash["itemCaption"]
+        book.image_url = book_hash["largeImageUrl"]
+        book.rakuten_url = book_hash["itemUrl"]
+      end
+    else
+      binding.break
+    end
   end
 
   private
