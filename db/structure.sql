@@ -46,15 +46,11 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.books (
     id bigint NOT NULL,
-    title character varying NOT NULL,
-    author character varying NOT NULL,
     isbn character varying NOT NULL,
-    genre character varying NOT NULL,
-    caption text,
-    release_date date,
-    image_url character varying,
     details jsonb NOT NULL,
+    genre character varying NOT NULL,
     parameter public.vector(4) NOT NULL,
+    z_score public.vector(4),
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -94,17 +90,12 @@ CREATE TABLE public.schema_migrations (
 
 CREATE TABLE public.tracks (
     id bigint NOT NULL,
-    title character varying NOT NULL,
-    artist character varying NOT NULL,
-    itunes_id character varying NOT NULL,
-    genre character varying NOT NULL,
-    release_date date,
-    image_url character varying,
-    preview_url character varying,
-    spotify_url character varying,
-    applemusic_url character varying,
+    itunes_id integer NOT NULL,
+    spotify_id character varying,
     details jsonb NOT NULL,
+    genre character varying NOT NULL,
     parameter public.vector(4) NOT NULL,
+    z_score public.vector(4),
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );

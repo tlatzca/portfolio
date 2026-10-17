@@ -1,20 +1,20 @@
 <div class="container">
   <div class="row mt-3">
     <div class="col-5 col-lg-3 text-end">
-      <%= image_tag @book["Item"]["largeImageUrl"].gsub('200x200', '300x300'), class: "img-fluid" %>
+      <%= image_tag @book.image_url.gsub('200x200', '300x300'), class: "img-fluid" %>
     </div>
     <div class="col-7 d-flex flex-column">
       <div class="mt-1">
-        <div class="fw-semibold"><%= @book["Item"]["title"] %></div>
-        <div><%= @book["Item"]["author"] %></div>
+        <div class="fw-semibold"><%= @book.title %></div>
+        <div><%= @book.author %></div>
       </div>
       <div class="mt-auto">
-        <div><%= @book["Item"]["itemCaption"] %></div>
+        <div><%= @book.caption %></div>
       </div>
     </div>
   </div>
   <div class="fw-bold text-center fs-3 mt-3">検索結果</div>
   <div class="row mt-2 gy-5 mb-3">
-    <%= render @similar_tracks %>
+    <%= render @tracks %>
   </div>
 </div>

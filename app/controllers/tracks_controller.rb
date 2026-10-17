@@ -6,10 +6,10 @@ class TracksController < ApplicationController
     uri = URI.parse("https://openapi.rakuten.co.jp/services/api/BooksTotal/Search/20170404")
 
     uri.query = URI.encode_www_form({
-      format: "json",
-      keyword: book_params[:query],
       applicationId: ENV["RAKUTEN_API_ID"],
-      accessKey: ENV["RAKUTEN_API_KEY"]
+      accessKey: ENV["RAKUTEN_API_KEY"],
+      format: "json",
+      keyword: book_params[:query]
     })
 
     request = Net::HTTP::Get.new(uri)
@@ -21,18 +21,26 @@ class TracksController < ApplicationController
     end
 
     if response.is_a?(Net::HTTPSuccess)
-      results = JSON.parse(response.body)["Items"]
+      book_hashes = JSON.parse(response.body)["Items"]&.map { _1["Item"] } || []
     else
-      results = []
+      book_hashes = []
     end
 
-    @book = results.find do |result|
-      result["Item"]["author"].present? &&
-      result["Item"]["itemCaption"].present?
+    book_hash = book_hashes.find do |b|
+      b["author"].present? && b["itemCaption"].present?
     end
 
-    @book ||= results.find do |result|
-      result["Item"]["author"].present?
+    book_hash ||= book_hashes.find do |b|
+      b["author"].present?
+    end
+
+    if book_hash
+      @book = Book.new
+      @book.title = book_hash["title"]
+      @book.author = book_hash["author"]
+      @book.caption = book_hash["itemCaption"]
+      @book.image_url = book_hash["largeImageUrl"]
+      @book.rakuten_url = book_hash["itemUrl"]
     end
 
     uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent")
@@ -77,10 +85,9 @@ class TracksController < ApplicationController
           ---
 
           [Input Data]
-          - Title: #{@book["Item"]["title"]}
-          - Auhor: #{@book["Item"]["author"]}
-          - Caption: #{@book["Item"]["itemCaption"]}
-          - Release Date: #{@book["Item"]["salesDate"]}"
+          - Title: #{@book.title}
+          - Auhor: #{@book.author}
+          - Caption: #{@book.caption}"
           }
         ]
       } ],
@@ -162,7 +169,7 @@ class TracksController < ApplicationController
     end
 
     if response.is_a?(Net::HTTPSuccess)
-      result_text = JSON.parse(response.body)["candidates"][0]["content"]["parts"][0]["text"]
+      result_text = JSON.parse(response.body).dig("candidates", 0, "content", "parts", 0, "text") || []
       parameter = JSON.parse(result_text)
     else
       binding.break
@@ -200,10 +207,9 @@ class TracksController < ApplicationController
     weirdness_average = weirdness_array.sum.fdiv(weirdness_array.size)
     weirdness = weirdness_average / 100
 
-    parameter_array = [ valence, energy, acousticness, weirdness ]
-    parameter_vector = "[#{parameter_array.join(',')}]"
+    parameter_vector = [ valence, energy, acousticness, weirdness ].to_s
 
-    @similar_tracks = Track.find_by_sql([
+    @tracks = Track.find_by_sql([
       "SELECT *,
       parameter <-> ?::vector
       AS l2_distance
@@ -211,6 +217,33 @@ class TracksController < ApplicationController
       ORDER BY l2_distance LIMIT 6;",
       parameter_vector
     ])
+
+    uri = URI.parse("https://itunes.apple.com/lookup")
+    uri.query = URI.encode_www_form({
+      lang: "ja_jp",
+      country: "jp",
+      media: "music",
+      id: @tracks.map(&:itunes_id).join(",")
+    })
+
+    response = Net::HTTP.get_response(uri)
+
+    if response.is_a?(Net::HTTPSuccess)
+      track_hashes = JSON.parse(response.body)["results"] || []
+
+      @tracks.each do |track|
+        track_hash = track_hashes.find { |t| t["trackId"] == track.itunes_id }
+        next unless track_hash
+
+        track.title = track_hash["trackName"]
+        track.artist = track_hash["artistName"]
+        track.image_url = track_hash["artworkUrl100"]
+        track.preview_url = track_hash["previewUrl"]
+        track.applemusic_url = track_hash["trackViewUrl"]
+      end
+    else
+      binding.break
+    end
   end
 
   private
