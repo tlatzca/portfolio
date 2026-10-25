@@ -5,7 +5,7 @@ module Gemini
     end
 
     def call
-      uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent")
+      uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent")
       request = Net::HTTP::Post.new(uri)
       request["Content-Type"] = "application/json"
       request["X-goog-api-key"] = ENV["GEMINI_API_KEY"]

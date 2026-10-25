@@ -10,7 +10,7 @@ module Match
         parameter <-> ?::vector
         AS l2_distance
         FROM books
-        ORDER BY l2_distance LIMIT 6;",
+        ORDER BY l2_distance LIMIT 8;",
         @parameter_vector
       ])
     end

@@ -10,7 +10,7 @@ module Match
         parameter <-> ?::vector
         AS l2_distance
         FROM tracks
-        ORDER BY l2_distance LIMIT 6;",
+        ORDER BY l2_distance LIMIT 18;",
         @parameter_vector
       ])
     end

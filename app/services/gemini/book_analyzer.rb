@@ -5,7 +5,7 @@ module Gemini
     end
 
     def call
-      uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent")
+      uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent")
       request = Net::HTTP::Post.new(uri)
       request["Content-Type"] = "application/json"
       request["X-goog-api-key"] = ENV["GEMINI_API_KEY"]
@@ -38,9 +38,8 @@ module Gemini
             ---
 
             [Input Data]
-            - Title: #{@book_hash[:title]}
-            - Author: #{@book_hash[:author]}
-            - Caption: #{@book_hash[:caption]}"
+            - Title: #{@book_hash[:openbd_title]}
+            - Author: #{@book_hash[:openbd_author]}"
             }
           ]
         } ],
@@ -137,7 +136,7 @@ module Gemini
                   },
                   acousticness: {
                     type: "object",
-                    description: "Analysis of the work's overall organic/natural texture, based primarily on the worldview component (0: Digital, mechanical, futuristic ↔ 100: Organic, natural depiction, realistic human/nature context).",
+                    description: "Analysis of the work's overall organic/natural texture (0: Digital, mechanical, futuristic ↔ 100: Organic, natural depiction, lived in).",
                     properties: {
                       reason: { type: "string", description: "The specific characteristics that justify the value below." },
                       value: { type: "integer", minimum: 0, maximum: 100 }
@@ -173,6 +172,7 @@ module Gemini
       response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         http.request(request)
       end
+
       return nil unless response.is_a?(Net::HTTPSuccess)
 
       result_text = JSON.parse(response.body).dig("candidates", 0, "content", "parts", 0, "text") || []

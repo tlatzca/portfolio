@@ -18,8 +18,10 @@ module Itunes
       return nil unless response.is_a?(Net::HTTPSuccess)
 
       track_hash = JSON.parse(response.body).dig("results", 0)
+      return nil if track_hash.blank?
 
       {
+        itunes_id: track_hash["trackId"],
         title: track_hash["trackName"],
         artist: track_hash["artistName"],
         album: track_hash["collectionName"],

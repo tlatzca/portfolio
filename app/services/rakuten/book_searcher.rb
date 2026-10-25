@@ -23,22 +23,30 @@ module Rakuten
       end
       return nil unless response.is_a?(Net::HTTPSuccess)
 
-      book_hashes = JSON.parse(response.body)["Items"]&.map { _1["Item"] } || []
+      rakuten_hashes = JSON.parse(response.body)["Items"].map { _1["Item"] }
+      return nil if rakuten_hashes.blank?
 
-      book_hash = book_hashes.find do |b|
-        b["author"].present? && b["itemCaption"].present?
+      rakuten_hashes.delete_if do |b|
+        b["author"].blank?
       end
-      book_hash ||= book_hashes.find do |b|
-        b["author"].present?
-      end
-      return nil unless book_hash
-      
+      return nil if rakuten_hashes.blank?
+
+      isbn_array = rakuten_hashes.map { |b| b["isbn"] }
+
+      openbd_hash = Openbd::BookFetcher.new(isbn_array).call
+      return nil unless openbd_hash
+
+      rakuten_hash = rakuten_hashes[openbd_hash[:index]]
+
       {
-        title: book_hash["title"],
-        author: book_hash["author"],
-        caption: book_hash["itemCaption"],
-        image_url: book_hash["largeImageUrl"],
-        rakuten_url: book_hash["itemUrl"]
+        isbn: openbd_hash[:isbn],
+        openbd_title: openbd_hash[:title],
+        openbd_author: openbd_hash[:author],
+        title: rakuten_hash["title"],
+        author: rakuten_hash["author"],
+        caption: rakuten_hash["itemCaption"],
+        image_url: rakuten_hash["largeImageUrl"],
+        rakuten_url: rakuten_hash["itemUrl"]
       }
     end
   end
