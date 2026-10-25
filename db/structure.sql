@@ -47,12 +47,14 @@ CREATE TABLE public.ar_internal_metadata (
 CREATE TABLE public.books (
     id bigint NOT NULL,
     isbn character varying NOT NULL,
-    details jsonb NOT NULL,
     genre character varying NOT NULL,
     parameter public.vector(4) NOT NULL,
     z_score public.vector(4),
+    analysis jsonb NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    title character varying NOT NULL,
+    author character varying NOT NULL
 );
 
 
@@ -85,19 +87,60 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: statistics; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.statistics (
+    id bigint NOT NULL,
+    media_type character varying NOT NULL,
+    valence_average double precision NOT NULL,
+    valence_stddev double precision NOT NULL,
+    energy_average double precision NOT NULL,
+    energy_stddev double precision NOT NULL,
+    acousticness_average double precision NOT NULL,
+    acousticness_stddev double precision NOT NULL,
+    weirdness_average double precision NOT NULL,
+    weirdness_stddev double precision NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: statistics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.statistics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: statistics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.statistics_id_seq OWNED BY public.statistics.id;
+
+
+--
 -- Name: tracks; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.tracks (
     id bigint NOT NULL,
-    itunes_id integer NOT NULL,
+    itunes_id bigint NOT NULL,
     spotify_id character varying,
-    details jsonb NOT NULL,
     genre character varying NOT NULL,
     parameter public.vector(4) NOT NULL,
     z_score public.vector(4),
+    analysis jsonb NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    title character varying NOT NULL,
+    artist character varying NOT NULL
 );
 
 
@@ -125,6 +168,13 @@ ALTER SEQUENCE public.tracks_id_seq OWNED BY public.tracks.id;
 --
 
 ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_id_seq'::regclass);
+
+
+--
+-- Name: statistics id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.statistics ALTER COLUMN id SET DEFAULT nextval('public.statistics_id_seq'::regclass);
 
 
 --
@@ -159,6 +209,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: statistics statistics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.statistics
+    ADD CONSTRAINT statistics_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: tracks tracks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -187,6 +245,11 @@ CREATE UNIQUE INDEX index_tracks_on_itunes_id ON public.tracks USING btree (itun
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261025100604'),
+('20261025100444'),
+('20261025073700'),
+('20261025064432'),
+('20261024052855'),
 ('20261005064338'),
 ('20261005045344');
 
