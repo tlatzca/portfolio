@@ -16,14 +16,14 @@ module Openbd
 
       openbd_hashes.each_with_index do |openbd_hash, index|
         next unless openbd_hash
-        
+
         summary = openbd_hash["summary"]
-        
+
         return {
           index: index,
           isbn: summary["isbn"],
           title: summary["title"],
-          author: summary["author"],
+          author: summary["author"]
         }
       end
     end

@@ -22,7 +22,7 @@ module Parameters
       weirdness = weirdness_average / 100.0
 
       valence = @parameter["valence"]["value"] /100.0
-      
+
       acousticness = @parameter["acousticness"]["value"] /100.0
 
       [ valence, energy, acousticness, weirdness ].to_s

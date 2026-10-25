@@ -71,9 +71,9 @@ module Gemini
                         description: "Plot & Story Intensity / Dynamic drive (0: Static, slow-paced, calm ↔ 100: Highly dynamic, intense, fast-paced plot)"
                       },
                       weirdness: {
-                        type: "integer", 
-                        minimum: 0, 
-                        maximum: 100, 
+                        type: "integer",
+                        minimum: 0,
+                        maximum: 100,
                         description: "Structural & Plot Strangeness (0: Conventional, standard narrative structure ↔ 100: Unusual, unpredictable, or avant-garde plot development)"
                       }
                     },
@@ -94,9 +94,9 @@ module Gemini
                         description: "Prose & Tone Intensity (0: Calm, passive, gentle prose ↔ 100: Energetic, passionate, high-tension writing style)"
                       },
                       weirdness: {
-                        type: "integer", 
-                        minimum: 0, 
-                        maximum: 100, 
+                        type: "integer",
+                        minimum: 0,
+                        maximum: 100,
                         description: "Stylistic & Expression Strangeness (0: Standard, straightforward grammar and tone ↔ 100: Highly unusual, experimental, or distinctive prose style)"
                       }
                     },

@@ -22,10 +22,10 @@ module Rakuten
       response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         http.request(request)
       end
-      
+
       book_hashes = JSON.parse(response.body)["Items"].map { _1["Item"] }
       return nil unless response.is_a?(Net::HTTPSuccess)
-      
+
       @books.each do |book|
         book_hash = book_hashes.find { |b| b["isbn"] == book.isbn }
 

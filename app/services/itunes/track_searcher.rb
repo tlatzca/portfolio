@@ -13,7 +13,7 @@ module Itunes
         media: "music",
         term: @query
       })
-      
+
       response = Net::HTTP.get_response(uri)
       return nil unless response.is_a?(Net::HTTPSuccess)
 

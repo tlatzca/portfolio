@@ -73,9 +73,9 @@ module Gemini
                         description: "Sound Loudness (0: Quiet, soft ↔ 100: Loud, heavy, powerful sound)"
                       },
                       weirdness: {
-                        type: "integer", 
-                        minimum: 0, 
-                        maximum: 100, 
+                        type: "integer",
+                        minimum: 0,
+                        maximum: 100,
                         description: "Instrument & Tone Strangeness (0: Standard instruments ↔ 100: Strange, instrument and tones)"
                       }
                     },
@@ -96,9 +96,9 @@ module Gemini
                         description: "Melody & Progression Intensity / Dynamic drive (0: Static, smooth, calm ↔ 100: Highly dynamic, intense, aggressive progression)"
                       },
                       weirdness: {
-                        type: "integer", 
-                        minimum: 0, 
-                        maximum: 100, 
+                        type: "integer",
+                        minimum: 0,
+                        maximum: 100,
                         description: "Structural & Melodic Strangeness (0: Conventional, standard arrangement ↔ 100: Unusual, unpredictable, or avant-garde structure and melody)"
                       }
                     },

@@ -40,4 +40,3 @@ CSV.foreach(file_path) do |row|
 
   sleep(1)
 end
-

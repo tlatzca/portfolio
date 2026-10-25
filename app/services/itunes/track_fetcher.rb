@@ -15,7 +15,7 @@ module Itunes
 
       response = Net::HTTP.get_response(uri)
       return nil unless response.is_a?(Net::HTTPSuccess)
-  
+
       track_hashes = JSON.parse(response.body)["results"]
 
       @tracks.each do |track|

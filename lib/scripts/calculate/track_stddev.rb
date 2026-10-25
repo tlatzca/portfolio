@@ -9,7 +9,7 @@ averages = values_by_axis.map do |values|
 end
 
 stddevs = values_by_axis.map.with_index do |values, i|
-  variance = values.sum {|value| (value - averages[i]) ** 2} / values.size.to_f
+  variance = values.sum { |value| (value - averages[i]) ** 2 } / values.size.to_f
   Math.sqrt(variance)
 end
 
