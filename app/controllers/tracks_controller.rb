@@ -8,8 +8,8 @@ class TracksController < ApplicationController
     parameter = Parameter::BookCalculator.new(analysis).call
     z_score = Zscore::BookCalculator.new(parameter).call
 
-    @tracks = Match::TrackFinder.new(z_score).call
-    @tracks = Itunes::TrackFetcher.new(@tracks).call
+    tracks = Match::TrackFinder.new(z_score).call
+    @tracks = Itunes::TrackFetcher.new(tracks).call
   end
 
   private

@@ -5,6 +5,8 @@ module Parameter
     end
 
     def call
+      return [] if @analysis.blank?
+
       energy_sum = (
         @analysis["sound"]["energy"] +
         @analysis["melody"]["energy"] +

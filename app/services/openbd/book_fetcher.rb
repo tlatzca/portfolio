@@ -9,10 +9,9 @@ module Openbd
       uri = URI.parse("https://api.openbd.jp/v1/get?isbn=#{isbn_string}")
 
       response = Net::HTTP.get_response(uri)
-      return nil unless response.is_a?(Net::HTTPSuccess)
+      return {} unless response.is_a?(Net::HTTPSuccess)
 
       openbd_hashes = JSON.parse(response.body)
-      return nil if openbd_hashes.blank?
 
       openbd_hashes.each_with_index do |openbd_hash, index|
         next unless openbd_hash
@@ -26,6 +25,8 @@ module Openbd
           author: summary["author"]
         }
       end
+
+      {}
     end
   end
 end

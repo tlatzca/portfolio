@@ -5,6 +5,8 @@ module Rakuten
     end
 
     def call
+      return {} if @query.blank?
+
       uri = URI.parse("https://openapi.rakuten.co.jp/services/api/BooksTotal/Search/20170404")
 
       uri.query = URI.encode_www_form({
@@ -21,20 +23,18 @@ module Rakuten
       response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         http.request(request)
       end
-      return nil unless response.is_a?(Net::HTTPSuccess)
+      return {} unless response.is_a?(Net::HTTPSuccess)
 
       rakuten_hashes = JSON.parse(response.body)["Items"].map { _1["Item"] }
-      return nil if rakuten_hashes.blank?
-
       rakuten_hashes.delete_if do |b|
         b["author"].blank?
       end
-      return nil if rakuten_hashes.blank?
+      return {} if rakuten_hashes.blank?
 
       isbn_array = rakuten_hashes.map { |b| b["isbn"] }
 
       openbd_hash = Openbd::BookFetcher.new(isbn_array).call
-      return nil unless openbd_hash
+      return {} if openbd_hash.blank?
 
       rakuten_hash = rakuten_hashes[openbd_hash[:index]]
 

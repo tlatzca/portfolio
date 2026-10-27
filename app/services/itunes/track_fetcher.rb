@@ -5,6 +5,8 @@ module Itunes
     end
 
     def call
+      return [] if @tracks.blank?
+
       uri = URI.parse("https://itunes.apple.com/lookup")
       uri.query = URI.encode_www_form({
         lang: "ja_jp",

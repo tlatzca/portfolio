@@ -5,6 +5,8 @@ module Match
     end
 
     def call
+      return [] if @z_score.blank?
+
       Track.find_by_sql([
         "SELECT *,
         parameter <-> ?::vector

@@ -5,6 +5,8 @@ module Match
     end
 
     def call
+      return [] if @z_score.blank?
+
       Book.find_by_sql([
         "SELECT *,
         z_score <-> ?::vector

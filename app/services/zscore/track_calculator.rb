@@ -5,6 +5,8 @@ module Zscore
     end
 
     def call
+      return [] if @parameter.blank?
+
       statistic = Statistic.find_by(media_type: "track")
 
       @parameter.zip(statistic.average, statistic.stddev).map do |param, avg, sd|

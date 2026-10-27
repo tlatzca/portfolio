@@ -16,15 +16,15 @@ CSV.foreach(file_path) do |row|
       next
     end
 
-    parameter_hash = Gemini::TrackAnalyzer.new(track_hash).call
-    if parameter_hash.blank?
+    analysis = Gemini::TrackAnalyzer.new(track_hash).call
+    if analysis.blank?
       message = "gemini分析失敗: #{query}"
       Rails.logger.warn(message)
       puts message
       next
     end
 
-    parameter_vector = Parameters::TrackCalculator.new(parameter_hash).call
+    parameter_vector = Parameters::TrackCalculator.new(analysis).call
 
     Track.create(
       itunes_id: track_hash[:itunes_id],
