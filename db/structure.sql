@@ -93,14 +93,8 @@ CREATE TABLE public.schema_migrations (
 CREATE TABLE public.statistics (
     id bigint NOT NULL,
     media_type character varying NOT NULL,
-    valence_average double precision NOT NULL,
-    valence_stddev double precision NOT NULL,
-    energy_average double precision NOT NULL,
-    energy_stddev double precision NOT NULL,
-    acousticness_average double precision NOT NULL,
-    acousticness_stddev double precision NOT NULL,
-    weirdness_average double precision NOT NULL,
-    weirdness_stddev double precision NOT NULL,
+    average double precision[] NOT NULL,
+    stddev double precision[] NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );

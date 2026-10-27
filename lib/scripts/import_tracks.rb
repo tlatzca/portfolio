@@ -28,6 +28,8 @@ CSV.foreach(file_path) do |row|
 
     Track.create(
       itunes_id: track_hash[:itunes_id],
+      title: track_hash[:track],
+      artist: track_hash[:artist],
       parameter: parameter_vector,
       genre: parameter_hash["genre"],
       analysis: parameter_hash
