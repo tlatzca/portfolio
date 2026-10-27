@@ -5,6 +5,8 @@ module Itunes
     end
 
     def call
+      return {} if @query.blank?
+
       uri = URI.parse("https://itunes.apple.com/search")
       uri.query = URI.encode_www_form({
         lang: "ja_jp",
@@ -15,10 +17,10 @@ module Itunes
       })
 
       response = Net::HTTP.get_response(uri)
-      return nil unless response.is_a?(Net::HTTPSuccess)
+      return {} unless response.is_a?(Net::HTTPSuccess)
 
       track_hash = JSON.parse(response.body).dig("results", 0)
-      return nil if track_hash.blank?
+      return {} if track_hash.blank?
 
       {
         itunes_id: track_hash["trackId"],

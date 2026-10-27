@@ -5,6 +5,8 @@ module Rakuten
     end
 
     def call
+      return [] if @books.blank?
+
       uri = URI.parse("https://openapi.rakuten.co.jp/services/api/BooksTotal/Search/20170404")
 
       uri.query = URI.encode_www_form({
@@ -24,7 +26,7 @@ module Rakuten
       end
 
       book_hashes = JSON.parse(response.body)["Items"].map { _1["Item"] }
-      return nil unless response.is_a?(Net::HTTPSuccess)
+      return [] unless response.is_a?(Net::HTTPSuccess)
 
       @books.each do |book|
         book_hash = book_hashes.find { |b| b["isbn"] == book.isbn }

@@ -1,21 +1,25 @@
 <div class="container">
-  <div class="row mt-3">
-    <div class="col-5 text-end">
-      <%= image_tag @track_hash[:image_url].gsub('100x100', '210x210'), class: "img-fluid" %>
-    </div>
-    <div class="col-7 d-flex flex-column">
-      <div class="mt-1">
-        <div class="fw-semibold"><%= @track_hash[:title] %></div>
-        <div><%= @track_hash[:artist] %></div>
+  <% if @track_hash.present? %>
+    <div class="row mt-3">
+      <div class="col-5 text-end">
+        <%= image_tag @track_hash[:image_url].gsub('100x100', '210x210'), class: "img-fluid" %>
       </div>
-      <div class="mt-auto">
-        <div><%= audio_tag(@track_hash[:preview_url], controls: true) %></div>
-        <div><%= link_to image_tag("https://toolbox.marketingtools.apple.com/api/v2/badges/listen-on-apple-music/badge/en-us"), @track_hash[:applemusic_url] %></div>
+      <div class="col-7 d-flex flex-column">
+        <div class="mt-1">
+          <div class="fw-semibold"><%= @track_hash[:title] %></div>
+          <div><%= @track_hash[:artist] %></div>
+        </div>
+        <div class="mt-auto">
+          <div><%= audio_tag(@track_hash[:preview_url], controls: true) %></div>
+          <div><%= link_to image_tag("https://toolbox.marketingtools.apple.com/api/v2/badges/listen-on-apple-music/badge/en-us"), @track_hash[:applemusic_url] %></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="fw-bold text-center fs-3 mt-3">検索結果</div>
-  <div class="row mt-2 gy-5 mb-3">
-    <%= render @books %>
-  </div>
+    <div class="fw-bold text-center fs-3 mt-3">検索結果</div>
+    <div class="row mt-2 gy-5 mb-3">
+      <%= render @books %>
+    </div>
+  <% else %>
+    <div class="alert alert-warning text-center mt-3">作品が見つかりませんでした</div>
+  <% end %>
 </div>

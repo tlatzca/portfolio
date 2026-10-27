@@ -5,6 +5,8 @@ module Gemini
     end
 
     def call
+      return {} if @track_hash.blank?
+
       uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent")
       request = Net::HTTP::Post.new(uri)
       request["Content-Type"] = "application/json"
@@ -138,7 +140,7 @@ module Gemini
                   },
                   acousticness: {
                     type: "object",
-                    description: "Analysis of the work's overall organic/natural texture, based primarily on the sound component (0: Electronic, synthesized sound ↔ 100: Acoustic instruments, natural depiction).",
+                    description: "Analysis of the work's overall humane texture, based primarily on the sound component (0: Electronic, synthesized sound ↔ 100: Acoustic instruments, humane voice).",
                     properties: {
                       reason: { type: "string", description: "The specific characteristics that justify the value below." },
                       value: { type: "integer", minimum: 0, maximum: 100 }
@@ -174,7 +176,7 @@ module Gemini
       response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         http.request(request)
       end
-      return nil unless response.is_a?(Net::HTTPSuccess)
+      return {} unless response.is_a?(Net::HTTPSuccess)
 
       parameter_text = JSON.parse(response.body).dig("candidates", 0, "content", "parts", 0, "text")
       JSON.parse(parameter_text)

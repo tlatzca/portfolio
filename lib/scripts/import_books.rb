@@ -16,15 +16,15 @@ CSV.foreach(file_path) do |row|
       next
     end
 
-    parameter_hash = Gemini::BookAnalyzer.new(book_hash).call
-    if parameter_hash.blank?
+    analysis = Gemini::BookAnalyzer.new(book_hash).call
+    if analysis.blank?
       message = "gemini分析失敗: #{query}"
       Rails.logger.warn(message)
       puts message
       next
     end
 
-    parameter_vector = Parameters::BookCalculator.new(parameter_hash).call
+    parameter_vector = Parameters::BookCalculator.new(analysis).call
 
     Book.create(
       isbn: book_hash[:isbn],
@@ -32,7 +32,7 @@ CSV.foreach(file_path) do |row|
       author: book_hash[:openbd_author],
       parameter: parameter_vector,
       genre: parameter_hash["genre"],
-      analysis: parameter_hash
+      analysis: analysis
     )
 
   rescue => e

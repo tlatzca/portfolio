@@ -5,6 +5,8 @@ module Gemini
     end
 
     def call
+      return {} if @book_hash.blank?
+
       uri = URI("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent")
       request = Net::HTTP::Post.new(uri)
       request["Content-Type"] = "application/json"
@@ -173,7 +175,7 @@ module Gemini
         http.request(request)
       end
 
-      return nil unless response.is_a?(Net::HTTPSuccess)
+      return {} unless response.is_a?(Net::HTTPSuccess)
 
       result_text = JSON.parse(response.body).dig("candidates", 0, "content", "parts", 0, "text") || []
       JSON.parse(result_text)
