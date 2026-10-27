@@ -1,0 +1,15 @@
+module Zscore
+  class TrackCalculator
+    def initialize(parameter)
+      @parameter = parameter
+    end
+
+    def call
+      statistic = Statistic.find_by(media_type: "track")
+
+      @parameter.zip(statistic.average, statistic.stddev).map do |param, avg, sd|
+        (param - avg) / sd
+      end
+    end
+  end
+end

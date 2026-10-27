@@ -1,17 +1,17 @@
 module Match
   class BookFinder
-    def initialize(parameter_vector)
-      @parameter_vector = parameter_vector
+    def initialize(z_score)
+      @z_score = z_score
     end
 
     def call
       Book.find_by_sql([
         "SELECT *,
-        parameter <-> ?::vector
+        z_score <-> ?::vector
         AS l2_distance
         FROM books
         ORDER BY l2_distance LIMIT 8;",
-        @parameter_vector
+        @z_score.to_s
       ])
     end
   end

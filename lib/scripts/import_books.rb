@@ -25,8 +25,11 @@ CSV.foreach(file_path) do |row|
     end
 
     parameter_vector = Parameters::BookCalculator.new(parameter_hash).call
+
     Book.create(
       isbn: book_hash[:isbn],
+      title: book_hash[:openbd_title],
+      author: book_hash[:openbd_author],
       parameter: parameter_vector,
       genre: parameter_hash["genre"],
       analysis: parameter_hash
