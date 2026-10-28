@@ -3,6 +3,8 @@ class BooksController < ApplicationController
   require "uri"
 
   def index
+    return redirect_to root_path if track_params[:query].blank?
+
     @track_hash = Itunes::TrackSearcher.new(track_params[:query]).call
     analysis = Gemini::TrackAnalyzer.new(@track_hash).call
     parameter = Parameter::TrackCalculator.new(analysis).call

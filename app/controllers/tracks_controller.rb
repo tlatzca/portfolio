@@ -3,6 +3,8 @@ class TracksController < ApplicationController
   require "uri"
 
   def index
+    return redirect_to root_path if book_params[:query].blank?
+
     @book_hash = Rakuten::BookSearcher.new(book_params[:query]).call
     analysis = Gemini::BookAnalyzer.new(@book_hash).call
     parameter = Parameter::BookCalculator.new(analysis).call
