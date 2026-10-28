@@ -8,8 +8,8 @@ class BooksController < ApplicationController
     parameter = Parameter::TrackCalculator.new(analysis).call
     z_score = Zscore::TrackCalculator.new(parameter).call
 
-    @books = Match::BookFinder.new(z_score).call
-    @books = Rakuten::BookFetcher.new(@books).call
+    books = Match::BookFinder.new(z_score).call
+    @books = Rakuten::BookFetcher.new(books).call
   end
 
   private
