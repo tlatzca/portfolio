@@ -13,5 +13,6 @@ RUN apt-get update -qq \
 WORKDIR /myapp
 COPY Gemfile Gemfile.lock /myapp/
 RUN bundle install
-EXPOSE 3000
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+COPY . .
+EXPOSE 80
+CMD ["./bin/thrust", "./bin/rails", "server"]
