@@ -14,5 +14,5 @@ WORKDIR /myapp
 COPY Gemfile Gemfile.lock /myapp/
 RUN bundle install
 COPY . .
-EXPOSE 3000
+EXPOSE 80
 CMD ["./bin/thrust", "./bin/rails", "server"]
