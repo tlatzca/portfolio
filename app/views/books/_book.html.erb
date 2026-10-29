@@ -1,12 +1,18 @@
-<div class="col-5 col-lg-3 text-end">
-  <%= image_tag book.image_url.gsub('200x200', '300x300'), class: "img-fluid" %>
-</div>
-<div class="col-6 col-lg-3 d-flex flex-column">
-  <div class="mt-1">
-    <div class="fw-semibold"><%= book.title %></div>
-    <div><%= book.author %></div>
-  </div>
-  <div class="mt-auto">
-    <div><%= book.caption %></div>
+<div class="col-12 col-lg-6">
+  <div class="shadow-sm p-4 rounded bg-light h-100">
+    <div class="row">
+      <div class="col-5 text-end">
+        <%= image_tag(book.image_url.gsub('200x200', '300x300'), class: "img-fluid") %>
+      </div>
+      <div class="col-7 d-flex flex-column">
+        <div class="mt-1">
+          <div class="fw-semibold"><%= link_to(book.title, book.rakuten_url, class: "text-dark") %></div>
+          <div><%= book.author %></div>
+        </div>
+        <div class="mt-auto">
+          <div><%= truncate(book.caption, length: 100) %></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
