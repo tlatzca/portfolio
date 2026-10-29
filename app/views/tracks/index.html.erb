@@ -1,21 +1,29 @@
 <div class="container">
   <% if @book_hash.present? %>
     <div class="row mt-3">
-      <div class="col-5 col-lg-3 text-end">
-        <%= image_tag @book_hash[:image_url].gsub('200x200', '300x300'), class: "img-fluid" %>
-      </div>
-      <div class="col-7 d-flex flex-column">
-        <div class="mt-1">
-          <div class="fw-semibold"><%= @book_hash[:title] %></div>
-          <div><%= @book_hash[:author] %></div>
-        </div>
-        <div class="mt-auto">
-          <div><%= @book_hash[:caption] %></div>
+      <div class="col-12 shadow-sm p-4 rounded bg-light">
+        <div class="row">
+          <div class="col-5 col-lg-3 text-end">
+            <%= image_tag @book_hash[:image_url].gsub('200x200', '300x300'), class: "img-fluid" %>
+          </div>
+          <div class="col-7 col-lg-9 d-flex flex-column">
+            <div class="mt-1">
+              <div class="fw-semibold"><%= link_to(@book_hash[:title], @book_hash[:rakuten_url], class: "text-dark") %></div>
+              <div><%= @book_hash[:author] %></div>
+            </div>
+            <div class="mt-auto">
+              <div><%= truncate(@book_hash[:caption], length: 100) %></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="fw-bold text-center fs-3 mt-3">検索結果</div>
-    <div class="row mt-2 gy-5 mb-3">
+    <div class="row mt-4 mb-3">
+      <div class="col-12 text-center">
+        <h2 class="fw-bold fs-4 pb-2 border-bottom border-2 border-primary d-inline-block px-4">検索結果</h2>
+      </div>
+    </div>
+    <div class="row gy-5 mb-3">
       <%= render @tracks %>
     </div>
   <% else %>

@@ -1,13 +1,19 @@
-<div class="col-5 col-lg-3 text-end">
-  <%= image_tag track.image_url.gsub('100x100', '210x210'), class: "img-fluid" %>
-</div>
-<div class="col-6 col-lg-3 d-flex flex-column">
-  <div class="mt-1">
-    <div class="fw-semibold"><%= track.title %></div>
-    <div><%= track.artist %></div>
-  </div>
-  <div class="mt-auto">
-    <div><%= audio_tag(track.preview_url, controls: true, style: "transform: scale(0.8); transform-origin: left;") %></div>
-    <div><%= link_to image_tag("https://toolbox.marketingtools.apple.com/api/v2/badges/listen-on-apple-music/badge/en-us"), track.applemusic_url %></div>
+<div class="col-12 col-lg-6">
+  <div class="shadow-sm p-4 rounded bg-light h-100">
+    <div class="row">
+      <div class="col-5 text-end">
+        <%= image_tag(track.image_url.gsub('100x100', '210x210'), class: "img-fluid") %>
+      </div>
+      <div class="col-7 d-flex flex-column">
+        <div class="mt-1">
+          <div class="fw-semibold"><%= link_to(track.title, track.applemusic_url, class: "text-dark") %></div>
+          <div><%= track.artist %></div>
+        </div>
+        <div class="mt-auto">
+          <div><%= audio_tag(track.preview_url, controls: true, style: "transform: scale(0.8); transform-origin: left;") %></div>
+          <div class="text-muted text-end" style="font-size: 0.75rem;">provided courtesy of iTunes</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
