@@ -1,10 +1,9 @@
 services:
   - type: web
-    name: myapp
-    runtime: ruby
+    name: halfstereo
+    runtime: docker
     plan: free
-    buildCommand: './bin/render-build.sh'
-    startCommand: 'bundle exec rails server'
+    region: singapore
     envVars:
       - key: DATABASE_URL
         sync: false
