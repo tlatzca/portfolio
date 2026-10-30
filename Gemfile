@@ -50,6 +50,7 @@ group :development, :test do
   gem "factory_bot_rails", "~> 6.5"
   gem "capybara"
   gem "simplecov", require: false
+  gem "bullet"
 end
 
 group :development do
