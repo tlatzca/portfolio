@@ -40,5 +40,8 @@ module Myapp
     config.generators.system_tests = nil
 
     config.active_record.schema_format = :sql
+
+    config.autoload_paths -= Dir["#{config.root}/lib/scripts/**/"]
+    config.eager_load_paths -= Dir["#{config.root}/lib/scripts/**/"]
   end
 end
