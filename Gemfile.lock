@@ -273,6 +273,7 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    simplecov (1.3.2)
     sprockets (4.4.1)
       concurrent-ruby (~> 1.1)
       logger
@@ -326,6 +327,7 @@ DEPENDENCIES
   rails (~> 8.0)
   rspec-rails (~> 8.0)
   rubocop-rails-omakase
+  simplecov
   sprockets-rails
   stimulus-rails
   turbo-rails

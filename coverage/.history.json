@@ -1,0 +1,200 @@
+{
+  "simplecov_history": {
+    "format_version": 1,
+    "entries": [
+      {
+        "created_at": "2026-10-30T23:03:06Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 38.5,
+          "branch": 22.58
+        },
+        "groups": {
+          "Channels": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Controllers": {
+            "line": 56.25,
+            "branch": 50.0
+          },
+          "Helpers": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Jobs": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Libraries": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "Mailers": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Models": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Ungrouped": {
+            "line": 48.12,
+            "branch": 24.0
+          }
+        },
+        "files": {
+          "app/channels/application_cable/channel.rb": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "app/channels/application_cable/connection.rb": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "app/controllers/application_controller.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/controllers/books_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/searches_controller.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/controllers/tracks_controller.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/application_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/books_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/searches_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/tracks_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/jobs/application_job.rb": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "app/mailers/application_mailer.rb": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "app/models/application_record.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/book.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/statistic.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/track.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/services/gemini/book_analyzer.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/services/gemini/track_analyzer.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/itunes/track_fetcher.rb": {
+            "line": 33.33,
+            "branch": 16.66
+          },
+          "app/services/itunes/track_searcher.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/match/book_finder.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/match/track_finder.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/services/openbd/book_fetcher.rb": {
+            "line": 93.33,
+            "branch": 50.0
+          },
+          "app/services/parameter/book_calculator.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/services/parameter/track_calculator.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/rakuten/book_fetcher.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/rakuten/book_searcher.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/services/zscore/book_calculator.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/services/zscore/track_calculator.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "lib/scripts/calculate/book_stddev.rb": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "lib/scripts/calculate/book_zscore.rb": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "lib/scripts/calculate/track_stddev.rb": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "lib/scripts/calculate/track_zscore.rb": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "lib/scripts/import_books.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "lib/scripts/import_itunes_data.rb": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "lib/scripts/import_openbd_data.rb": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "lib/scripts/import_tracks.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          }
+        }
+      }
+    ]
+  }
+}
