@@ -43,6 +43,9 @@
 # Ignore development files
 /.devcontainer
 
+# Ignore local-only data import scripts (not needed in production)
+/lib/scripts/
+
 # Ignore Docker-related files
 /.dockerignore
 /Dockerfile*
