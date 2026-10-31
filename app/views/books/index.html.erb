@@ -27,13 +27,14 @@
     <div class="row mt-2 gy-4 mb-3">
       <%= render @books %>
     </div>
+    <div class="row mb-3">
+      <div class="col-12 text-end">
+        <a href="https://developers.rakuten.com/" target="_blank" rel="noopener noreferrer" class="text-muted text-decoration-none small">
+          Supported by Rakuten Developers
+        </a>
+      </div>
+    </div>
   <% else %>
     <div class="alert alert-warning text-center mt-3">作品が見つかりませんでした</div>
   <% end %>
-
-  <div class="row mb-3">
-    <a href="https://developers.rakuten.com/" target="_blank" rel="noopener noreferrer" class="col-12 text-end text-muted text-decoration-none small">
-      Supported by Rakuten Developers
-    </a>
-  </div>
 </div>
