@@ -24,6 +24,7 @@ module Rakuten
       response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         http.request(request)
       end
+      return [] unless response.is_a?(Net::HTTPSuccess)
 
       JSON.parse(response.body)["Items"].map { _1["Item"] }
     end
