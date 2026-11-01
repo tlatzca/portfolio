@@ -6,7 +6,7 @@
       </div>
       <div class="col-7 d-flex flex-column">
         <div class="mt-1">
-          <div class="fw-semibold"><%= link_to(book.title, book.rakuten_url, class: "text-dark") %></div>
+          <div class="fw-semibold"><%= link_to(book.title, tracks_path(isbn: book.isbn), class: "text-dark") %></div>
           <div><%= book.author %></div>
         </div>
         <div class="mt-auto">
