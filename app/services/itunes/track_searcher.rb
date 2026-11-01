@@ -5,7 +5,7 @@ module Itunes
     end
 
     def call
-      return {} if @query.blank?
+      return empty_result if @query.blank?
 
       uri = URI.parse("https://itunes.apple.com/search")
       uri.query = URI.encode_www_form({
@@ -17,10 +17,10 @@ module Itunes
       })
 
       response = Net::HTTP.get_response(uri)
-      return {} unless response.is_a?(Net::HTTPSuccess)
+      return empty_result unless response.is_a?(Net::HTTPSuccess)
 
       track_hash = JSON.parse(response.body).dig("results", 0)
-      return {} if track_hash.blank?
+      return empty_result if track_hash.blank?
 
       {
         display: {
@@ -38,6 +38,12 @@ module Itunes
           genre: track_hash["primaryGenreName"]
         }
       }
+    end
+
+    private
+
+    def empty_result
+      { display: {}, analysis: {} }
     end
   end
 end
