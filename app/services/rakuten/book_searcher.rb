@@ -39,14 +39,18 @@ module Rakuten
       rakuten_hash = rakuten_hashes[openbd_hash[:index]]
 
       {
-        isbn: openbd_hash[:isbn],
-        openbd_title: openbd_hash[:title],
-        openbd_author: openbd_hash[:author],
-        title: rakuten_hash["title"],
-        author: rakuten_hash["author"],
-        caption: rakuten_hash["itemCaption"],
-        image_url: rakuten_hash["largeImageUrl"],
-        rakuten_url: rakuten_hash["itemUrl"]
+        display: {
+          isbn: openbd_hash[:isbn],
+          title: rakuten_hash["title"],
+          author: rakuten_hash["author"],
+          caption: rakuten_hash["itemCaption"],
+          image_url: rakuten_hash["largeImageUrl"],
+          rakuten_url: rakuten_hash["itemUrl"]
+        },
+        analysis: {
+          openbd_title: openbd_hash[:title],
+          openbd_author: openbd_hash[:author]
+        }
       }
     end
   end

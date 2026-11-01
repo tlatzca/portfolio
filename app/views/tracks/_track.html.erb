@@ -6,7 +6,7 @@
       </div>
       <div class="col-7 d-flex flex-column">
         <div class="mt-1">
-          <div class="fw-semibold"><%= link_to(track.title, track.applemusic_url, class: "text-dark") %></div>
+          <div class="fw-semibold"><%= link_to(track.title, books_path(itunes_id: track.itunes_id), class: "text-dark") %></div>
           <div><%= track.artist %></div>
         </div>
         <div class="mt-auto">

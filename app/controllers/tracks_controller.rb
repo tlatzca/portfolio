@@ -3,20 +3,30 @@ class TracksController < ApplicationController
   require "uri"
 
   def index
-    return redirect_to root_path if book_params[:query].blank?
+    if book_params[:isbn].present?
+      @book = Book.find_by(isbn: book_params[:isbn])
+      book_hash = Rakuten::BookFetcher.new(@book.isbn).call.first
+      @book.merge_book_hash(book_hash)
 
-    @book_hash = Rakuten::BookSearcher.new(book_params[:query]).call
-    analysis = Gemini::BookAnalyzer.new(@book_hash).call
-    parameter = Parameter::BookCalculator.new(analysis).call
-    z_score = Zscore::BookCalculator.new(parameter).call
+      z_score = @book.z_score
+    else
+      return redirect_to root_path if book_params[:query].blank?
+
+      book_hash = Rakuten::BookSearcher.new(book_params[:query]).call
+      @book = Book.new(book_hash[:display])
+      analysis = Gemini::BookAnalyzer.new(book_hash[:analysis]).call
+      parameter = Parameter::BookCalculator.new(analysis).call
+      z_score = Zscore::BookCalculator.new(parameter).call
+    end
 
     tracks = Match::TrackFinder.new(z_score).call
-    @tracks = Itunes::TrackFetcher.new(tracks).call
+    track_hashes = Itunes::TrackFetcher.new(tracks.map(&:itunes_id).join(",")).call
+    @tracks = tracks.filter_map { |track| track.merge_by_id(track_hashes) }
   end
 
   private
 
   def book_params
-    params.permit(:query)
+    params.permit(:query, :isbn)
   end
 end

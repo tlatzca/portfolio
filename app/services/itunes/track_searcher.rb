@@ -2,6 +2,7 @@ module Itunes
   class TrackSearcher
     def initialize(query)
       @query = query
+
     end
 
     def call
@@ -23,14 +24,20 @@ module Itunes
       return {} if track_hash.blank?
 
       {
-        itunes_id: track_hash["trackId"],
-        title: track_hash["trackName"],
-        artist: track_hash["artistName"],
-        album: track_hash["collectionName"],
-        genre: track_hash["primaryGenreName"],
-        image_url: track_hash["artworkUrl100"],
-        preview_url: track_hash["previewUrl"],
-        applemusic_url: track_hash["trackViewUrl"]
+        display: {
+          itunes_id: track_hash["trackId"],
+          title: track_hash["trackName"],
+          artist: track_hash["artistName"],
+          image_url: track_hash["artworkUrl100"],
+          preview_url: track_hash["previewUrl"],
+          applemusic_url: track_hash["trackViewUrl"]
+        },
+        analysis: {
+          title: track_hash["trackName"],
+          artist: track_hash["artistName"],
+          album: track_hash["collectionName"],
+          genre: track_hash["primaryGenreName"]
+        }
       }
     end
   end
