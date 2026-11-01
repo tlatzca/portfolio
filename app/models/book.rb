@@ -16,7 +16,7 @@ class Book < ApplicationRecord
     self.rakuten_url = book_hash["itemUrl"]
     self
   end
-  
+
   def merge_by_isbn(book_hashes)
     book_hash = book_hashes.find { |b| b["isbn"] == isbn }
     return nil if book_hash.blank?

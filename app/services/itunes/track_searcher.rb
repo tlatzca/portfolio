@@ -2,7 +2,6 @@ module Itunes
   class TrackSearcher
     def initialize(query)
       @query = query
-
     end
 
     def call
